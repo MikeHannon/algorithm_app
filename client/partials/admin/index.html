@@ -1,0 +1,255 @@
+<div class = "row"></div>
+<div class = "row">
+  <div class = "col m3 offset-m1">
+    <a class="waves-effect waves-dark blue btn"><i class="material-icons left">person_pin</i>Users</a>
+    <div class="collection">
+      <a href="" ng-click = "user.index(); admin.users_index()" class="collection-item">Index</a>
+      <a href="" ng-click = "admin.users_new()" class="collection-item">New</a>
+    </div>
+      <!-- <button>Users</button>
+    <i class="material-icons prefix large">person_pin</i> -->
+  </div>
+  <div class = "col m3 offset-m1">
+      <a class="waves-effect waves-dark blue btn"><i class="material-icons left">subtitles</i>Algorithms</a>
+      <div class="collection">
+        <a href="" ng-click = "algorithm.index(); admin.algorithm_index(); " class="collection-item">Index</a>
+        <a href="" ng-click = "admin.algorithm_new()" class="collection-item">New</a>
+      </div>
+
+  </div>
+  <div class = "col m3 offset-m1">
+      <a class="waves-effect waves-dark blue btn"><i class="material-icons left">perm_media</i>Data</a>
+      <div class="collection">
+        <a href="" ng-click = "admin.data_index()"  class="collection-item">Index</a>
+        <a href="" ng-click = "admin.data_new()" class="collection-item">New</a>
+      </div>
+  </div>
+</div>
+
+<div class = 'row' ng-if = "admin.algorithm_index_bool" ng-repeat = "algorithm in algorithm.algorithms">
+  <p> I am an algorithm </p>
+</div>
+
+<div class = 'row' ng-if = "admin.algorithm_new_bool">
+  <script src = "static/materialize/js/materialize.min.js"> </script>
+  <script src = "static/js/new_algorithm.js"></script>
+
+  <div class="row">
+  <div class="col s12">
+
+    <ul class="tabs">
+      <li class="tab col s3"><a href="#general">General</a></li>
+      <li class="tab col s3"><a href="#algo_hints">Hints/Info</a></li>
+      <li class="tab col s3"><a href="#supplements">Supplemental Info</a></li>
+      <li class="tab col s3"><a href="#algorithm_meat">Algorithm</a></li>
+
+    </ul>
+
+
+  </div>
+  <div id="general" class="col s12">
+      <div class="row">
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="algo_title" type="text" ng-model = "admin.algorithm.title" name = "title">
+            <label for="algo_title">Title</label>
+          </div>
+          <div class="input-field col s12">
+            <textarea id="algo_goal" type="text" ng-model = "admin.algorithm.goal" name = "goal"></textarea>
+            <label for="algo_goal">Goal</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="algo_oneStar" type="text" ng-model = "admin.algorithm.Onestar" name = "Onestar">
+            <label for="algo_oneStar">One Star criteria</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="algo_twoStar" ng-model = "admin.algorithm.Twostars" type="text" name = "Twostars">
+            <label for="algo_twoStar">Two star criteria</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="algo_threeStar" ng-model = "admin.algorithm.Threestars" type="text" name = "Threestars">
+            <label for="algo_threeStar">Three star criteria</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="algo_bonus" type="text" name = "Bonus" ng-model = "admin.algorithm.Bonus">
+            <label for="algo_bonus">Bonus criteria (for badges)</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="algo_evaluation" ng-model = "admin.algorithm.Evaluation" type="text" name = "Evaluation">
+            <label for="algo_evaluation">What is going to be evaluated</label>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+  <div id="algo_hints" class="col s12">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="algo_hint1" type="text" ng-model = "admin.algorithm.hint1" name = "hint1">
+          <label for="algo_hint1">First Hint</label>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s6">
+            <input id="hint1_time" ng-model = "admin.algorithm.hint1_time" type="text" name = "hint1_time" placeholder="milliseconds (1/2 hr is 1800000) before hint available">
+            <label for="hint1_time">Hint1 Time</label>
+          </div>
+          <div class="input-field col s6">
+            <input id="hint1_keystrokes" ng-model = "admin.algorithm.hint1_keystrokes" type="text" name = "hint1_keystrokes" placeholder="number of keystrokes before hint is available">
+            <label for="hint1_keystrokes">Hint1 KeyStrokes</label>
+          </div>
+        </div>
+
+        <div class="input-field col s12">
+          <input id="algo_hint2"  ng-model = "admin.algorithm.hint2" type="text" name = "hint2" placeholder = "url for video hint">
+          <label for="algo_hint2">Video Hint</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="hint2_time" ng-model = "admin.algorithm.hint2_time" type="text" name = "hint2_time" placeholder="milliseconds (1/2 hr is 1800000) before hint available">
+          <label for="hint2_time">Hint2 Time</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="hint2_keystrokes" ng-model = "admin.algorithm.hint2_keystrokes" type="text" name = "hint2_keystrokes" placeholder="number of keystrokes before hint is available">
+          <label for="hint2_keystrokes">Hint2 KeyStrokes</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="algo_hint3" ng-model = "admin.algorithm.hint3" type="text" name = "hint3">
+          <label for="algo_hint3">Optional Hint</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="hint3_time" ng-model = "admin.algorithm.hint3_time" type="text" name = "hint3_time" placeholder="milliseconds (1/2 hr is 1800000) before hint available">
+          <label for="hint3_time">Hint3 Time</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="hint3_keystrokes" ng-model = "admin.algorithm.hint3_keystrokes" type="text" name = "hint3_keystrokes" placeholder="number of keystrokes before hint is available">
+          <label for="hint3_keystrokes">Hint3 KeyStrokes</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="prev_solution_unlock_time" ng-model = "admin.algorithm.prev_solution_unlock_time" type="text" name = "prev_solution_unlock_time" placeholder="time (milliseconds) before user previous solution available">
+          <label for="prev_solution_unlock_time">time until old solution available (milliseconds)</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="prev_solution_unlock_keystroke" ng-model = "admin.algorithm.prev_solution_unlock_keystroke" type="text" name = "prev_solution_unlock_keystroke" placeholder="keystrokes until users previous solution available">
+          <label for="prev_solution_unlock_keystroke">Keystrokes until old solution available</label>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="input-field col s4">
+          <input id="time_allowed" ng-model = "admin.algorithm.time_allowed" type="text" name = "time_allowed">
+          <label for="time_allowed">Time Before AutoSubmit(minutes)</label>
+        </div>
+
+
+        <div class="input-field col s4">
+          <input id="resubmit_after" type="text" ng-model = "admin.algorithm.resubmit_after" name = "resubmit_after">
+          <label for="resubmit_after">cooldown(minutes)</label>
+        </div>
+
+
+        <div class="input-field col s4">
+          <input id="difficulty" ng-model = "admin.algorithm.difficulty" type="text" name = "difficulty">
+          <label for="difficulty">Challenge Rating (0-3) (Easy-to-Hard)</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="typeofquestion" ng-model = "admin.algorithm.type" type="text" name = "type">
+          <label for="typeofquestion">Type (e.g. array or bit manipulation *beta*)</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="degradation_rate" ng-model = "admin.algorithm.degradation_rate" type="text" name = "degradation_rate">
+          <label for="degradation_rate">Degradation Rate (for badges) # of hours</label>
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+
+
+  <div id="supplements" class="col s12">
+    <textarea id="supp_materials" ng-model = "admin.algorithm.supp_materials" type="text" name = "supp_materials">
+    </textarea>
+    <label for="supp_materials">Supplemental Material -- Fill out with an array of objects:
+    [{'purpose':'(short title)', 'link':'(url or link)'}] - don't change the keys though, just the title/and link
+    </label>
+  </div>
+
+  <div id="algorithm_meat" class="row">
+    <div class = "col m3" id = "starting_code"></div>
+    <div  class = "col m3" id = "test_code"></div>
+    <div  class = "col m3" id = "solution"></div>
+    <div  class = "col m3" id = "evaluation_of_start_and_test_code"></div>
+    <button onclick = "evaluate_solutions();">Evaluate</button>
+    <button ng-click = "admin.create_algorithm();">Save your algorithm</button>
+  </div>
+
+</div>
+
+<div class = 'row' ng-if = "admin.users_index_bool" >
+  <div class = "col m3 offset-m1"  >
+    <input placeholder = "Search" id = "user_search" ng-model = "admin.users_search" type = "text">
+    <label for = "user_search">Search</label>
+  </div>
+  <table class = "col m8 offset-m1"  ng-if = "admin.users_index_bool">
+    <tr>
+      <td>Last Name, First Name</td>
+      <td>Admin Level</td>
+      <td>Cohort</td>
+      <td><p>Current Status</p>
+          <p> <u>Int</u> |  <u>Adv</u> |  <u>Challenge</u> </p></td>
+      <td>Email</td>
+    </tr>
+    <tr ng-repeat = "user in user.users | orderBy:admin.sortType:admin.sortReverse | filter:admin.users_search">
+      <td><span ng-bind = "user.last_name"></span>, <span  ng-bind = "user.first_name"></td>
+      <td ng-bind = "user.admin_level"></td>
+      <td>Class of </td>
+      <td> 0/35 | 0/35 | 0/30</td>
+      <td ng-bind = "user.email"></td>
+      <td><a href = "">Update</a></td>
+      <td><a href = "">Delete</a></td>
+      <td><a href = "">Info</a></td>
+    </tr>
+
+  </table>
+</div>
+
+  <div class = 'row' ng-if = "admin.users_new_bool">
+    <p> I am an new user</p>
+  </div>
+
+  <div class = 'row' ng-if = "admin.data_index_bool" ng-repeat = "algorithm in algorithm.algorithms">
+    <p> I am data </p>
+  </div>
+
+  <div class = 'row' ng-if = "admin.data_new_bool" ng-repeat = "algorithm in algorithm.algorithms">
+    <p> I am new data</p>
+  </div>

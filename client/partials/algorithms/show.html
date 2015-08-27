@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.min.js"></script> -->
+  <script src = "static/ace-builds/src-noconflict/ace.js"> </script>
+  <!-- <script src = "static/js/libs/jquery-2.1.3.min.js"> </script> -->
+  <script src = "static/materialize/js/materialize.min.js"> </script>
+  <link rel="stylesheet" href="static/materialize/css/materialize.min.css">
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script> -->
+  <link rel="stylesheet" href="static/css/main.css">
+
+  <script src = "static/modules/main.js"></script>
+  <script src = "static/controllers/main.js"></script>
+  <script src = "static/js/main.js"></script>
+  <script src = "static/js/editor.js"></script>
+  <title>Document</title>
+</head>
+<body>
+
+<div class="row">
+  <div class = "col s12 m12 l12" id = "assignments">
+    <h5 id = "assign_title" ng-bind = "algorithm.show_algorithm.title" ng-init = "main.adjust_size()"> </h5>
+    <p ng-bind-html ="algorithms.show_algorithm.goal"></p>
+    <i class="tiny material-icons">star star star</i>:&nbsp;<span ng-bind = "algorithm.show_algorithm.Threestars"></span></br>
+    <i class="tiny material-icons">star star </i>:&nbsp;<span ng-bind = "algorithm.show_algorithm.Twostars"></span></br>
+    <i class="tiny material-icons">star </i>:&nbsp;<span ng-bind = "algorithm.show_algorithm.Onestar"></span>
+    <p ng-bind = "algorithm.show_algorithm.Evaluation"></p>
+  </div>
+</div>
+    <div class="row">
+    <div class="col s6 m6 l6">
+      <ul class="tabs">
+        <li class="tab col s2">
+          <a class = "blue-text" id = "editor_tab" href="#editor">editor</a>
+        </li>
+        <li class="tab col s1">
+          <a class = "blue-text" href="#pseudocodes" id = "pseudocode_tab">pseudocode</a>
+        </li>
+        <li class="tab col s2" >
+          <a class = "blue-text" id = "eval_tab" href="#eval" ng-click = "main.show_evaluations2()">evaluate</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col s6 m6 l6">
+      <ul class = "tabs">
+        <li class="tab col s2">
+          <a class = "blue-text" id = "chat_tab" href="#chat">chat</a>
+        </li>
+        <li class="tab col s2">
+          <a class = "blue-text" id = "console_tab" href="#consoles">console</a>
+        </li>
+        <li class="tab col s1">
+          <a class = "blue-text" href="#hints" id = "hint_tab">hints</a>
+        </li>
+      </ul>
+    </div>
+
+      <div class="col s12" id = "editor" ng-bind = "algorithm.show_algorithm.starting_code">
+<!-- var selection_sort = function(anArray){
+  if (anArray.length > 0){
+
+    for (var j = 0; j < anArray.length; j ++){
+      var min = j;
+      for (var i = j; i < anArray.length; i ++){
+        if (anArray[i]< anArray[min]){
+          min = i;
+        }
+      }
+      var temp = anArray[j];
+      anArray[j] = anArray[min];
+      anArray[min]=temp;
+    }
+  }
+  return anArray;
+} -->
+      </div>
+      <div class="col s12" id = "chat"></div>
+      <div id="consoles" class="col s12"></div>
+      <div id="pseudocodes" class="col s12"></div>
+      <div id="eval" class="col s12"></div>
+      <div id="hints" class="col s12"></div>
+    </div>
+<div class = "row">
+<div class = "col m2">
+  <button id = "evaluate" ng-click = "main.show_evaluations3()"> Evaluate </button>
+</div>
+<div class = "col m2">
+  <button id = "submit_answer" ng-click = "main.show_evaluations(algorithm.show_algorithm.test_code)">Submit Answer </button>
+</div>
+</div>
+
+  <!-- <div class="input-field col m3" id = "modes">
+  <select>
+    <option value="" disabled selected>Choose your language</option>
+    <option value="1">Javascript</option>
+    <option value="2">Ruby</option>
+    <option value="3">PHP</option>
+    <option value="4">MySQL</option>
+    <option value="5">HTML</option>
+    <option value="6">Python</option>
+    <option value="7">Text</option>
+  </select>
+  <label>Language</label>
+  </div> -->
+
+
+
+
+
+
+</body ng-init = "main.adjust_size()">
+</html>
