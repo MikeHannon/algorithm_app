@@ -10,6 +10,23 @@ algorithm_app.controller('adminController', function($scope,$routeParams, $locat
   that.twoStars = "Use one hint";
   that.threeStars = "Use no hints";
 
+  that.hint1_timer = 10000000;
+  that.hint2_timer = 18000000;
+  that.hint3_timer = 24000000;
+
+  that.hint1_keystroke = 300;
+  that.hint2_keystroke = 500;
+  that.hint3_keystroke = 700;
+
+  that.prev_solution_unlock_keystrokes = 1000;
+  that.prev_solution_unlock_timer = 24000000;
+  that.resubmit_after = 1;
+  that.degradation_rate = 2400;
+  that.time_allowed = 60;
+  that.type_of = "Choose one: Array, Linked_List, Data Structure, Library, String, Other";
+
+
+
   that.sortType     = 'first_name'; // set the default sort type
   that.sortReverse  = false; //default order
 

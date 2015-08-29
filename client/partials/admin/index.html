@@ -104,11 +104,11 @@
 
         <div class="row">
           <div class="input-field col s6">
-            <input id="hint1_time" ng-model = "admin.algorithm.hint1_time" type="text" name = "hint1_time" placeholder="milliseconds (1/2 hr is 1800000) before hint available">
-            <label for="hint1_time">Hint1 Time</label>
+            <input id="hint1_time" ng-model = "admin.algorithm.hint1_time" type="text" ng-value ="admin.hint1_timer" name = "hint1_time" placeholder="milliseconds (1/2 hr is 1800000) before hint available">
+            <label for="hint1_time">Hint1 Time(ms)</label>
           </div>
           <div class="input-field col s6">
-            <input id="hint1_keystrokes" ng-model = "admin.algorithm.hint1_keystrokes" type="text" name = "hint1_keystrokes" placeholder="number of keystrokes before hint is available">
+            <input id="hint1_keystrokes" ng-model = "admin.algorithm.hint1_keystrokes" type="text" name = "hint1_keystrokes" placeholder="number of keystrokes before hint is available" ng-value ="admin.hint1_keystroke">
             <label for="hint1_keystrokes">Hint1 KeyStrokes</label>
           </div>
         </div>
@@ -121,11 +121,11 @@
 
       <div class="row">
         <div class="input-field col s6">
-          <input id="hint2_time" ng-model = "admin.algorithm.hint2_time" type="text" name = "hint2_time" placeholder="milliseconds (1/2 hr is 1800000) before hint available">
-          <label for="hint2_time">Hint2 Time</label>
+          <input id="hint2_time" ng-value ="admin.hint2_timer" ng-model = "admin.algorithm.hint2_time" type="text" name = "hint2_time" placeholder="milliseconds (1/2 hr is 1800000) before hint available">
+          <label for="hint2_time">Hint2 Time(ms)</label>
         </div>
         <div class="input-field col s6">
-          <input id="hint2_keystrokes" ng-model = "admin.algorithm.hint2_keystrokes" type="text" name = "hint2_keystrokes" placeholder="number of keystrokes before hint is available">
+          <input id="hint2_keystrokes" ng-model = "admin.algorithm.hint2_keystrokes" type="text" name = "hint2_keystrokes" placeholder="number of keystrokes before hint is available" ng-value ="admin.hint2_keystroke">
           <label for="hint2_keystrokes">Hint2 KeyStrokes</label>
         </div>
       </div>
@@ -139,22 +139,24 @@
 
       <div class="row">
         <div class="input-field col s6">
-          <input id="hint3_time" ng-model = "admin.algorithm.hint3_time" type="text" name = "hint3_time" placeholder="milliseconds (1/2 hr is 1800000) before hint available">
-          <label for="hint3_time">Hint3 Time</label>
+          <input id="hint3_time" ng-model = "admin.algorithm.hint3_time" type="text" name = "hint3_time" ng-value ="admin.hint3_timer" placeholder="milliseconds (1/2 hr is 1800000) before hint available">
+          <label for="hint3_time">Hint3 Time(ms)</label>
         </div>
         <div class="input-field col s6">
-          <input id="hint3_keystrokes" ng-model = "admin.algorithm.hint3_keystrokes" type="text" name = "hint3_keystrokes" placeholder="number of keystrokes before hint is available">
+          <input id="hint3_keystrokes" ng-model = "admin.algorithm.hint3_keystrokes" type="text" name = "hint3_keystrokes" placeholder="number of keystrokes before hint is available" ng-value ="admin.hint3_keystroke">
           <label for="hint3_keystrokes">Hint3 KeyStrokes</label>
         </div>
       </div>
 
       <div class="row">
         <div class="input-field col s6">
-          <input id="prev_solution_unlock_time" ng-model = "admin.algorithm.prev_solution_unlock_time" type="text" name = "prev_solution_unlock_time" placeholder="time (milliseconds) before user previous solution available">
-          <label for="prev_solution_unlock_time">time until old solution available (milliseconds)</label>
+          <input id="prev_solution_unlock_time" ng-model = "admin.algorithm.prev_solution_unlock_time" ng-value ="admin.prev_solution_unlock_timer" type="text" name = "prev_solution_unlock_time" placeholder="time (milliseconds) before user previous solution available">
+          <label for="prev_solution_unlock_time">time until old solution available (ms)</label>
         </div>
         <div class="input-field col s6">
-          <input id="prev_solution_unlock_keystroke" ng-model = "admin.algorithm.prev_solution_unlock_keystroke" type="text" name = "prev_solution_unlock_keystroke" placeholder="keystrokes until users previous solution available">
+          <input id="prev_solution_unlock_keystroke" ng-model = "admin.algorithm.prev_solution_unlock_keystroke" type="text"
+          ng-value = "admin.prev_solution_unlock_keystrokes"
+          name = "prev_solution_unlock_keystroke" placeholder="keystrokes until users previous solution available">
           <label for="prev_solution_unlock_keystroke">Keystrokes until old solution available</label>
         </div>
       </div>
@@ -162,13 +164,14 @@
 
       <div class="row">
         <div class="input-field col s4">
-          <input id="time_allowed" ng-model = "admin.algorithm.time_allowed" type="text" name = "time_allowed">
+          <input id="time_allowed" ng-model = "admin.algorithm.time_allowed" type="text" name = "time_allowed" ng-value = "admin.time_allowed"
+          placeholder = "how long they have to do the problem">
           <label for="time_allowed">Time Before AutoSubmit(minutes)</label>
         </div>
 
 
         <div class="input-field col s4">
-          <input id="resubmit_after" type="text" ng-model = "admin.algorithm.resubmit_after" name = "resubmit_after">
+          <input id="resubmit_after" type="text" ng-model = "admin.algorithm.resubmit_after" name = "resubmit_after" ng-value = "admin.resubmit_after" placeholder = "time after submission that a person can try again">
           <label for="resubmit_after">cooldown(minutes)</label>
         </div>
 
@@ -181,11 +184,11 @@
 
       <div class="row">
         <div class="input-field col s6">
-          <input id="typeofquestion" ng-model = "admin.algorithm.type" type="text" name = "type">
+          <input id="typeofquestion" ng-model = "admin.algorithm.type" type="text" name = "type" ng-value="admin.type_of" placeholder = "still working on this">
           <label for="typeofquestion">Type (e.g. array or bit manipulation *beta*)</label>
         </div>
         <div class="input-field col s6">
-          <input id="degradation_rate" ng-model = "admin.algorithm.degradation_rate" type="text" name = "degradation_rate">
+          <input id="degradation_rate" ng-model = "admin.algorithm.degradation_rate" type="text" ng-value = "admin.degradation_rate" placeholder = "how long until the stars reset" name = "degradation_rate">
           <label for="degradation_rate">Degradation Rate (for badges) # of hours</label>
         </div>
       </div>
