@@ -58,36 +58,42 @@ function size_consoles(){
   console.log(assignment)
 }
 
-function evaluate_and_console_log(data, callback){
+function evaluate_and_console_log2(data, callback){
+
   //var data = solution.editor.getValue() + " " + test_code.editor.getValue();
   var myyield = eval(data);
-   $('#eval').html(myyield);
+  // evaluation_of_start_and_test_code.editor.setValue(myyield);
+  $('#eval').html(myyield);
 
-  //evaluation.editor.setValue(myyield);
+}
+
+
+function evaluate_and_console_log(data, callback){
+
   //generates the console log and evaluat
-  // var old = console.log;
-  // var old2 = window.onerror;
-  // var logger = document.getElementById('consoles');
-  // var evaluate =
-  // logger.innerHTML = "";
-  // $('#eval').html("");
-  // console.log = function (message) {
-  //     if (typeof message == 'object') {
-  //         logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(message) : message) + '<br />';
-  //     } else {
-  //         logger.innerHTML += message + '<br />';
-  //     }
-  // }
-  //
-  // window.onerror = function(msg, url, linenumber) {
-  // logger.innerHTML += ('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+(linenumber));
-  // }
-  //
-  // $('#eval').html(eval(data)); //document.getElementById('eval');
-  //
-  // // $('#console_tab').attr("class","white-text blue");
-  // // $('#eval_tab').attr("class","white-text blue");
-  // console.log = old;
-  // window.onerror = old2;
-  // //callback();
+  var old = console.log;
+  var old2 = window.onerror;
+  var logger = document.getElementById('consoles');
+  var evaluate =
+  logger.innerHTML = "";
+  $('#eval').html("");
+  console.log = function (message) {
+      if (typeof message == 'object') {
+          logger.innerHTML += (JSON && JSON.stringify ? JSON.stringify(message) : message) + '<br />';
+      } else {
+          logger.innerHTML += message + '<br />';
+      }
+  }
+
+  window.onerror = function(msg, url, linenumber) {
+  logger.innerHTML += ('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+(linenumber));
+  }
+
+  $('#eval').html(eval(data)); //document.getElementById('eval');
+
+  // $('#console_tab').attr("class","white-text blue");
+  // $('#eval_tab').attr("class","white-text blue");
+  console.log = old;
+  window.onerror = old2;
+  callback();
 }

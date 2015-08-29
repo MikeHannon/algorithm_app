@@ -6,6 +6,9 @@ algorithm_app.controller('adminController', function($scope,$routeParams, $locat
   that.users_new_bool = false;
   that.data_index_bool = false;
   that.data_new_bool = false;
+  that.oneStar = "Use two hints";
+  that.twoStars = "Use one hint";
+  that.threeStars = "Use no hints";
 
   that.sortType     = 'first_name'; // set the default sort type
   that.sortReverse  = false; //default order

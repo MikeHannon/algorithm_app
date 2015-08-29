@@ -11,8 +11,7 @@ algorithm_app.controller('mainController', function($scope,$routeParams, $locati
     //event.stopPropagation();
     console.log(assignment_test);
     var data = that.evaluate.function.editor.getValue() + assignment_test;
-    console.log(data);
-    evaluate_and_console_log(data, function(){});
+    evaluate_and_console_log2(data, function(){});
     //submit
     $timeout(function() {
       $('#eval_tab').click();

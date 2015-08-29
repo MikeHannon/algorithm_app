@@ -1,4 +1,4 @@
-algorithm_app.controller('usersController', function($scope, $location, $timeout, $cookies, usersFactory) {
+algorithm_app.controller('usersController', function($scope,$routeParams, $location, $timeout, $cookies, usersFactory) {
   var that = this;
   this.user = {};
   this.login_errors;
