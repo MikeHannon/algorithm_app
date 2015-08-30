@@ -16,4 +16,5 @@ algorithm_app.controller('algorithmController', function($scope,$routeParams, $l
     that.show_algorithm = data;
     console.log(that.show_algorithm);
   }
+  this.index();
 });

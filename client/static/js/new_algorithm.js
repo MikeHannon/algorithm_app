@@ -12,7 +12,7 @@ var evaluation_of_start_and_test_code = new Editor("evaluation_of_start_and_test
 
 console.log(starting_code);
 
-starting_code.editor.setValue("Use this window to set the starting info you want students to begin with \n test code is to the right w/ an example \n it will test the code on the bottom \n(this doubles as the solution code on save after your testing is set), \n evaluated code will be in the bottom right.\n\n\n Comparing to console logs is challenging:\n Use the following example\n var k = [];\n(function(){\n var exLog = console.log;\n console.log = function(msg){\n k.push(msg);\n exLog.apply(this,arguments);}})()\n run the function e.g.\n function helloworld(){console.log('hello world');} helloworld(); \n k[0] at this point should be 'hello world' \n then compare to expected result to k (or k[0] if you just have a single console.log event)\n", -1);
+starting_code.editor.setValue("Use this window to set the starting info you want students to begin with \n test code is to the right w/ an example \n it will test the code on the bottom \n(this doubles as the solution code on save after your testing is set), \n evaluated code will be in the bottom right.\n\n\n Comparing to console logs is challenging:\n Use the following example\n var k = [];\n(function(){\n k = [];\n var exLog = console.log;\n console.log = function(msg){\n k.push(msg);\n exLog.apply(this,arguments);}})()\n run the function e.g.\n function helloworld(){console.log('hello world');} helloworld(); \n k[0] at this point should be 'hello world' \n then compare to expected result to k (or k[0] if you just have a single console.log event)\n", -1);
 
 test_code.editor.setValue("", -1);
 solution.editor.setValue("", -1);
