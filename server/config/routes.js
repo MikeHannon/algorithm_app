@@ -15,6 +15,16 @@ module.exports = function(app) {
     Users.create(req,res);
   });
 //new
+  app.post('/users/:user_id/:algo_id',function(req,res){
+    Users.create_algorithm(req,res);
+    //res.json({"hello":"worldinput"});
+  });
+
+  app.post('/users_algorithms/:user_id', function(req,res){
+    Users.get_algorithms(req,res);
+    console.log(req.params.user_id);
+  });
+
   app.get('/users/new', function(req,res){
     res.json({"hello":"world"});
   });

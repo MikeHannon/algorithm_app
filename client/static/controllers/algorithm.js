@@ -11,8 +11,12 @@ algorithm_app.controller('algorithmController', function($scope,$routeParams, $l
     });
   }
 
-  this.show_algorithm_html = function(data){
-    console.log(data, "dstuff");
+  this.show_algorithm_html = function(data, user_index){
+    // console.log(data, "dstuff");
+    console.log(user_index);
+    if (user_index){
+      console.log(user_index);
+    }
     that.show_algorithm = data;
     console.log(that.show_algorithm);
   }

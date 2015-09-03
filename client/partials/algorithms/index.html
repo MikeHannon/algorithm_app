@@ -26,13 +26,23 @@
         <!-- algo.name -->
         <div ng-if = "algo.difficulty == 0">
 
-                <div class="col s12 m2">
+                <div class="col s12 m4">
                   <div class="card blue-grey darken-1 tiny">
                     <div class="card-content white-text left-align">
-                      <p class="card-content center-align" ng-bind = "algo.title"> </p>
+                      <p class="card-content  yellow-text center-align" ng-bind = "algo.title"> </p>
+                      <p class="card-content center-align" ng-if = "user.algorithm_unlocked(algo._id) == -1;">Locked </p>
+                      <div  ng-if = "user.algorithm_unlocked(algo._id) !== -1;">
+                        <p class="card-content center-align"> Time Left To Solve: <span ng-bind = "user.is_algorithm(algo._id).time_spent | date:'h:mm:ss'"></span><p>
+                        <p class="card-content center-align"> Time Until Restart: <span ng-bind = "user.is_algorithm(algo._id).restart_time | date:'h:mm:ss'" ></span><p>
+
+                        <p class="card-content center-align"> Score: <span ng-bind = "user.is_algorithm(algo._id).score"></span><p>
+
+                        </div>
                     </div>
                     <div class="card-action center-align">
-                      <a href="#/challenges/{{algo._id}}" ng-click = "algorithm.show_algorithm_html(algo)" class = "center-align">Try It</a>
+
+                      <a ng-if = "user.algorithm_unlocked(algo._id) == -1;" href="#/challenges/{{algo._id}}" ng-click = "algorithm.show_algorithm_html(algo); user.initiate_algorithm(user.user.user_id, algo)" class="waves-effect waves-light btn"><i class="mdi-action-lock-outline left"></i>Unlock</a>
+                      <a ng-if = "user.algorithm_unlocked(algo._id) != -1;" href="#/challenges/{{algo._id}}" ng-click = "algorithm.show_algorithm_html(algo, user.algorithm_unlocked(algo._id))" class = "center-align">Continue</a>
                     </div>
                   </div>
                 </div>

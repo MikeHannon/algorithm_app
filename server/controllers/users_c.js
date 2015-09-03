@@ -78,9 +78,27 @@ module.exports = (function() {
           else {res.json({"errors":"User exists"});}
         }
       })
+    },
 
+    create_algorithm: function(req,res){
+      var user = User.findOne({_id:req.params.user_id}, function(err, user){
+        if (err){console.log(err);}
+        else {console.log(user);
+        user.algorithm.push(req.body);
+        user.save();
+        }
+      });
+      res.json({"body":req.body, "params":req.params});
+    },
 
-
+    get_algorithms:function(req,res){
+      var user = User.findOne({_id:req.params.user_id},"algorithm",function(err,algorithms){
+        if (err){console.log(err);}
+        else {console.log(algorithms);
+        res.json({users_algorithms:algorithms});
+        }
+      });
     }
+
   }
 })();
