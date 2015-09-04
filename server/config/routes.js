@@ -35,7 +35,7 @@ module.exports = function(app) {
 //test
 
   app.get('/algorithms', function(req, res){
-    console.log("in the router");
+    // console.log("in the router");
     Algorithms.index(req,res);
   });
 

@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Algorithm = mongoose.model('Algorithm');
-console.log("algo  scontroller");
+
 
 module.exports = (function() {
   return {

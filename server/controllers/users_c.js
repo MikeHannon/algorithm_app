@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
-console.log("controller");
+
 
 module.exports = (function() {
   return {
@@ -99,6 +99,5 @@ module.exports = (function() {
         }
       });
     }
-
   }
 })();
