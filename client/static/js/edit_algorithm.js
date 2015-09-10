@@ -14,10 +14,12 @@ var test_code_bool = false;
 var solution_code_bool = false;
 
 function load_info(){
+  if (solution.editor.getValue().length < 1){
   var data = $('[ng-controller="algorithmController as algorithm"]').scope().algorithm.show_algorithm;
   solution.editor.setValue(data.solution);
   starting_code.editor.setValue(data.starting_code);
   test_code.editor.setValue(data.test_code);
+}
 //  console.log(data.test_code);
   //var param1 = document.getElementById("myVar").value;
     //console.log( param1 );

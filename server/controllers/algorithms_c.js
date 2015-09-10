@@ -37,8 +37,6 @@ module.exports = (function() {
       });
     },
 
-    update_algorithm: function(req,res){
 
-    }
   }
 })();
