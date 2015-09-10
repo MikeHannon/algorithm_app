@@ -1,0 +1,187 @@
+
+<script src = "static/materialize/js/materialize.min.js"> </script>
+
+<p ng-bind = "algorithm.show_algorithm.title"></p>
+<div class="row">
+<div class="col s12">
+
+  <ul class="tabs">
+    <li class="tab col s3"><a href="#general">General</a></li>
+    <li class="tab col s3"><a href="#algo_hints">Hints/Info</a></li>
+    <li class="tab col s3"><a href="#supplements">Supplemental Info</a></li>
+    <li class="tab col s3"><a href="#algorithm_meat">Algorithm</a></li>
+
+  </ul>
+
+
+</div>
+<div id="general" class="col s12">
+    <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="algo_title" type="text" ng-model = "algorithm.show_algorithm.title" name = "title">
+          <label for="algo_title">Title</label>
+        </div>
+        <div class="input-field col s12">
+          <textarea id="algo_goal" type="text" ng-model = "algorithm.show_algorithm.goal" name = "goal"></textarea>
+          <label for="algo_goal">Goal</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="Placeholder" id="algo_oneStar" type="text" ng-model = "algorithm.show_algorithm.Onestar" ng-value ="admin.oneStar" name = "Onestar">
+          <label for="algo_oneStar">One Star criteria(add a space to confirm default)</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="Placeholder" id="algo_twoStar" ng-model = "algorithm.show_algorithm.Twostars" ng-value ="admin.twoStars" type="text" name = "Twostars" >
+          <label for="algo_twoStar">Two star criteria (add a space to confirm default)</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="Placeholder" id="algo_threeStar" ng-model = "algorithm.show_algorithm.Threestars" type="text" name = "Threestars" ng-value ="admin.threeStars" >
+          <label for="algo_threeStar">Three star criteria (add a space to confirm default)</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="algo_bonus" type="text" name = "Bonus" ng-model = "algorithm.show_algorithm.Bonus">
+          <label for="algo_bonus">Bonus criteria (for badges)</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="algo_evaluation" ng-model = "algorithm.show_algorithm.Evaluation" type="text" name = "Evaluation">
+          <label for="algo_evaluation">What is going to be evaluated</label>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+<div id="algo_hints" class="col s12">
+  <form class="col s12">
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="algo_hint1" type="text" ng-model = "algorithm.show_algorithm.hint1" name = "hint1">
+        <label for="algo_hint1">First Hint</label>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="hint1_time" ng-model = "algorithm.show_algorithm.hint1_time" type="text" ng-value ="admin.hint1_timer" name = "hint1_time" placeholder="milliseconds (1/2 hr is 1800000) before hint available">
+          <label for="hint1_time">Hint1 Time(ms)</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="hint1_keystrokes" ng-model = "algorithm.show_algorithm.hint1_keystrokes" type="text" name = "hint1_keystrokes" placeholder="number of keystrokes before hint is available" ng-value ="admin.hint1_keystroke">
+          <label for="hint1_keystrokes">Hint1 KeyStrokes</label>
+        </div>
+      </div>
+
+      <div class="input-field col s12">
+        <input id="algo_hint2"  ng-model = "algorithm.show_algorithm.hint2" type="text" name = "hint2" placeholder = "url for video hint">
+        <label for="algo_hint2">Video Hint</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s6">
+        <input id="hint2_time" ng-value ="admin.hint2_timer" ng-model = "algorithm.show_algorithm.hint2_time" type="text" name = "hint2_time" placeholder="milliseconds (1/2 hr is 1800000) before hint available">
+        <label for="hint2_time">Hint2 Time(ms)</label>
+      </div>
+      <div class="input-field col s6">
+        <input id="hint2_keystrokes" ng-model = "algorithm.show_algorithm.hint2_keystrokes" type="text" name = "hint2_keystrokes" placeholder="number of keystrokes before hint is available" ng-value ="admin.hint2_keystroke">
+        <label for="hint2_keystrokes">Hint2 KeyStrokes</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="algo_hint3" ng-model = "algorithm.show_algorithm.hint3" type="text" name = "hint3">
+        <label for="algo_hint3">Optional Hint</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s6">
+        <input id="hint3_time" ng-model = "algorithm.show_algorithm.hint3_time" type="text" name = "hint3_time" ng-value ="admin.hint3_timer" placeholder="milliseconds (1/2 hr is 1800000) before hint available">
+        <label for="hint3_time">Hint3 Time(ms)</label>
+      </div>
+      <div class="input-field col s6">
+        <input id="hint3_keystrokes" ng-model = "algorithm.show_algorithm.hint3_keystrokes" type="text" name = "hint3_keystrokes" placeholder="number of keystrokes before hint is available" ng-value ="admin.hint3_keystroke">
+        <label for="hint3_keystrokes">Hint3 KeyStrokes</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s6">
+        <input id="prev_solution_unlock_time" ng-model = "algorithm.show_algorithm.prev_solution_unlock_time" ng-value ="admin.prev_solution_unlock_timer" type="text" name = "prev_solution_unlock_time" placeholder="time (milliseconds) before user previous solution available">
+        <label for="prev_solution_unlock_time">time until old solution available (ms)</label>
+      </div>
+      <div class="input-field col s6">
+        <input id="prev_solution_unlock_keystroke" ng-model = "algorithm.show_algorithm.prev_solution_unlock_keystroke" type="text"
+        ng-value = "admin.prev_solution_unlock_keystrokes"
+        name = "prev_solution_unlock_keystroke" placeholder="keystrokes until users previous solution available">
+        <label for="prev_solution_unlock_keystroke">Keystrokes until old solution available</label>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="input-field col s4">
+        <input id="time_allowed" ng-model = "algorithm.show_algorithm.time_allowed" type="text" name = "time_allowed" ng-value = "admin.time_allowed"
+        placeholder = "how long they have to do the problem">
+        <label for="time_allowed">Time Before AutoSubmit(ms)</label>
+      </div>
+
+
+      <div class="input-field col s4">
+        <input id="resubmit_after" type="text" ng-model = "algorithm.show_algorithm.resubmit_after" name = "resubmit_after" ng-value = "admin.resubmit_after" placeholder = "time after submission that a person can try again">
+        <label for="resubmit_after">cooldown(ms)</label>
+      </div>
+
+
+      <div class="input-field col s4">
+        <input id="difficulty" ng-model = "algorithm.show_algorithm.difficulty" type="text" name = "difficulty">
+        <label for="difficulty">Challenge Rating (0-3) (Easy-to-Hard)</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s6">
+        <input id="typeofquestion" ng-model = "algorithm.show_algorithm.type" type="text" name = "type" ng-value="admin.type_of" placeholder = "still working on this">
+        <label for="typeofquestion">Type (e.g. array or bit manipulation *beta*)</label>
+      </div>
+      <div class="input-field col s6">
+        <input id="degradation_rate" ng-model = "algorithm.show_algorithm.degradation_rate" type="text" ng-value = "admin.degradation_rate" placeholder = "how long until the stars reset" name = "degradation_rate">
+        <label for="degradation_rate">Degradation Rate (for badges) ms(default 100 days of ms)</label>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+
+<div id="supplements" class="col s12">
+  <textarea id="supp_materials" ng-model = "algorithm.show_algorithm.supp_materials" type="text" name = "supp_materials">
+  </textarea>
+  <label for="supp_materials">Supplemental Material -- Fill out with an array of objects:
+  [{'purpose':'(short title)', 'link':'(url or link)'}] - don't change the keys though, just the title/and link
+  </label>
+</div>
+
+
+<script src = "static/js/edit_algorithm.js"></script>
+
+<div id="algorithm_meat" class="row" onclick = "load_info()">
+  <div class = "col m3" id = "starting_code"></div>
+  <div  class = "col m3" id = "test_code"></div>
+  <div  class = "col m3" id = "solution"></div>
+  <div  class = "col m3" id = "evaluation_of_start_and_test_code"></div>
+  <button onclick = "evaluate_solutions();">Evaluate</button>
+  <button ng-click = "algorithm.update_algorithm();">update this algorithm</button>
+</div>

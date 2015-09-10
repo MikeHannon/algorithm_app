@@ -30,8 +30,15 @@ algorithm_app.factory('algorithmFactory', function($http) {
     .finally(function() {
       console.log("finally finished");
     });
+  }
 
-
+  factory.update = function(data,callback){
+    console.log(data, "FROM FACTORY UPDATE");
+    $http.post('/algorithms/'+data._id, data).then(function(output){})
+    .catch(function(response){
+      console.log("error!");
+    })
+    .finally(function(){console.log("done");});
   }
 
   return factory;

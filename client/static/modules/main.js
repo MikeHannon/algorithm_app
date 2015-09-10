@@ -13,6 +13,11 @@ algorithm_app.config(function ($routeProvider) {
        templateUrl: './../partials/algorithms/index.html',
        controller: 'validCredentials'
     })
+    .when('/algorithms/:id/edit',{
+       templateUrl: './../partials/algorithms/edit.html',
+       controller: 'validCredentials'
+    })
+
     .when('/challenges/:algorithmId',{
        templateUrl: './../partials/algorithms/show.html',
        controller: 'validCredentials'
@@ -30,4 +35,21 @@ algorithm_app.config(function ($routeProvider) {
     .otherwise({
       redirectTo: '/'
     });
+});
+algorithm_app.filter('duration', function() {
+    //Returns duration from milliseconds in hh:mm:ss format.
+      return function(millseconds) {
+        var seconds = Math.floor(millseconds / 1000);
+        var h = 3600;
+        var m = 60;
+        var hours = Math.floor(seconds/h);
+        var minutes = Math.floor( (seconds % h)/m );
+        var scnds = Math.floor( (seconds % m) );
+        var timeString = '';
+        if(scnds < 10) scnds = "0"+scnds;
+        if(hours < 10) hours = "0"+hours;
+        if(minutes < 10) minutes = "0"+minutes;
+        timeString = hours +":"+ minutes +":"+scnds;
+        return timeString;
+    }
 });

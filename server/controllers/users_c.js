@@ -81,6 +81,7 @@ module.exports = (function() {
     },
 
     create_algorithm: function(req,res){
+      console.log("in the controller");
       var user = User.findOne({_id:req.params.user_id}, function(err, user){
         if (err){console.log(err);}
         else {console.log(user);
@@ -98,6 +99,31 @@ module.exports = (function() {
         res.json({users_algorithms:algorithms});
         }
       });
-    }
+    },
+
+    update_algorithm: function(req,res){
+      console.log(req.body.algo_id, "here");
+      var user = User.findOne({_id:req.params.user_id}, function(err, user){
+        if (err){console.log(err);}
+        // else {console.log(user);
+          for (var i = 0; i < user.algorithm.length; i ++){
+            //console.log(user.algorithm[i].algo_id);
+            if (user.algorithm[i].algo_id == req.body.algo_id){
+              req.body.working_solution = user.algorithm[i].working_solution;
+              req.body.score =  user.algorithm[i].score;
+              user.algorithm[i] = req.body;
+              User.findOneAndUpdate({_id:user._id}, {$set:{algorithm:user.algorithm}},function (err,data){
+                if (err) {return "fail";}
+                res.json(data);
+              });
+              //console.log(user);
+            }
+          }
+        // user.algorithm.push(req.body);
+        // user.save();
+        //}
+      //console.log("I am here now");
+      });
+    },
   }
 })();

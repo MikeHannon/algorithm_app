@@ -18,8 +18,8 @@ algorithm_app.factory('usersFactory', function($http) {
   }
 
   factory.initiate_algorithm = function(user_id,algo,callback){
-    console.log(algo);
-
+    console.log("in factory");
+//adapt this to correlate with the updated model.
     var algorithm_info = {};
     algorithm_info['keystrokes']=0;
     algorithm_info['unlocked']=true;
@@ -29,13 +29,37 @@ algorithm_app.factory('usersFactory', function($http) {
     algorithm_info['prev_solution'] ="";
     algorithm_info['current_solution'] ="";
     algorithm_info['working_solution'] = "";
-    algorithm_info['restart_time'] = algo.resubmit_after;
-    algorithm_info['threestartime'] = new Date(9999999999999);
+    algorithm_info['time_to_resubmit'] = algo.resubmit_after;
+    algorithm_info['threestartime'] = 0;
     algorithm_info['solution_efficiency'] = 0;
-
-    $http.post('/users/'+user_id+'/'+algo._id, algorithm_info).success(function(output){
-      console.log(output);
+    console.log(algorithm_info, "algo_info!");
+    $http.post('/users/'+user_id+'/'+algo._id, algorithm_info).then(function(output){
+      console.log(output), function(){console.log("ERRROR");};
     });
+  }
+
+  factory.update_algorithm = function(user_id, algorithm_id){
+    console.log(user_id);
+    var algorithm_info = {};
+    algorithm_info['keystrokes']=0;
+    algorithm_info['unlocked']=true;
+    algorithm_info['score']=0;
+    algorithm_info['time_spent']=algorithm_id.time_allowed;
+    algorithm_info['algo_id']=algorithm_id._id;
+  //  algorithm_info['prev_solution'] ="";
+    algorithm_info['current_solution'] ="";
+    algorithm_info['working_solution'] = "";
+    algorithm_info['time_to_resubmit'] = algorithm_id.resubmit_after;
+    algorithm_info['threestartime'] = 0;
+    algorithm_info['solution_efficiency'] = 0;
+    console.log(algorithm_info, "algo_info!");
+    $http.patch('/users/'+user_id+'/'+algorithm_id._id, algorithm_info).then(function(output){
+      console.log(output), function(){console.log("ERRROR");};
+    });
+
+
+
+
   }
 
   factory.login = function(info, callback){

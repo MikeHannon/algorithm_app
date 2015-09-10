@@ -4,13 +4,15 @@ var algorithms = new mongoose.Schema({
   score:'number', //0,1,2,3
   unlocked:'boolean',
   algo_id: mongoose.Schema.Types.ObjectId,
-  time_spent:'Date',
+  time_spent:'number',
   created_at:{type:Date,default:Date.now},
   updated_at:{type:Date,default:Date.now},
   prev_solution:'string',
   current_solution:'string',
   working_solution:'string',
-  threestartime:'Date',
+  threestartime:'number',
+  time_to_resubmit:'number',
+  date_started:{type:Date,default:Date.now}, // for our timers...
   solution_efficiency:'number',
   keyStrokes:"number",
   restart_time:'Date'

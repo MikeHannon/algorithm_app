@@ -19,11 +19,18 @@ module.exports = function(app) {
     Users.create_algorithm(req,res);
     //res.json({"hello":"worldinput"});
   });
+  app.patch('/users/:user_id/:algo_id',function(req,res){
+    console.log("hello");
+    Users.update_algorithm(req,res);
+    //res.json({"hello":"worldinput"});
+  });
 
   app.post('/users_algorithms/:user_id', function(req,res){
     Users.get_algorithms(req,res);
     console.log(req.params.user_id);
   });
+
+
 
   app.get('/users/new', function(req,res){
     res.json({"hello":"world"});
@@ -43,6 +50,11 @@ module.exports = function(app) {
     // console.log(req.body);
     Algorithms.create(req,res);
     // res.json({"hello":"world"});
+  });
+
+  app.post('/algorithms/:id',function(req,res){
+    console.log(req.params);
+    Algorithms.update(req,res);
   });
 
   // app.post

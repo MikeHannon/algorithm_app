@@ -17,19 +17,19 @@ var schema = new mongoose.Schema(
     hint1:'string',//
     hint2:'string',//
     hint3:'string',//
-    hint1_time:'Date',//
-    hint2_time:'Date',//
-    hint3_time:'Date',//
-    prev_solution_unlock_time:'Date',//
+    hint1_time:'number',//
+    hint2_time:'number',//
+    hint3_time:'number',//
+    prev_solution_unlock_time:'number',//
     hint1_keystrokes:'number',//
     hint2_keystrokes:'number',//
     hint3_keystrokes:'number',//
     prev_solution_unlock_keystroke:'number',//
-    time_allowed:'Date',//
+    time_allowed:'number',//
     difficulty:'number',//
     type:'string',//
-    degradation_rate:'Date',//
-    resubmit_after:'Date', //resubmit
+    degradation_rate:'number',//
+    resubmit_after:'number', //resubmit
     created_at: { type: Date, default: Date.now },
     updated_at: { type: Date, default: Date.now }
     }

@@ -32,6 +32,7 @@ algorithm_app.controller('usersController', function($scope,$routeParams, $locat
       else {
         set_users(data);
         that.login_errors = null;
+        that.users_algorithms_index();
         $location.path("/algorithms");
       }
     });
@@ -65,6 +66,7 @@ algorithm_app.controller('usersController', function($scope,$routeParams, $locat
       //  data['user_id']=data._id;
         set_users(data);
         that.login_errors = null;
+        that.users_algorithms_index();
         $location.path("/algorithms");
 
       }
@@ -74,10 +76,10 @@ algorithm_app.controller('usersController', function($scope,$routeParams, $locat
   }
 
   this.initiate_algorithm = function(user_id, algo){
-  //  console.log(algo);
+    console.log(algo,"from initiate");
     usersFactory.initiate_algorithm(user_id,algo,function(data){
 
-     console.log(data);
+     //console.log(data);
     });
   }
 
@@ -105,11 +107,29 @@ this.algorithm_unlocked = function(algorithm_id){
   return -1;
 }
 
+this.algo_up_to_date = function(algorithm_updated){
+  // console.log(algorithm_updated);
+  if (that.users_algorithms){
+    for (var i = 0; i < that.users_algorithms.length; i ++){
+      if (that.users_algorithms[i].created_at < algorithm_updated){
+        return false;
+      }
+    }
+  }
+  return true;
+}
+this.algorithm_reunlock = function(algorithm_info){
+  console.log(algorithm_info);
+  usersFactory.update_algorithm(that.user.user_id, algorithm_info);
+}
+
 this.is_algorithm = function(algorithm_id){
   if (that.users_algorithms){
     for (var i = 0; i < that.users_algorithms.length; i ++){
       //  console.log(that.users_algorithms[i]);
       if (that.users_algorithms[i].algo_id == algorithm_id){
+
+          // console.log("old!");
         return that.users_algorithms[i];
       }
     }
@@ -126,6 +146,7 @@ function set_users(data){
   $cookies.put('updated_at', data.updated_at);
   $cookies.put('user_id', data._id);
   that.user = data;
+  that.users_algorithms_index();
 }
 
 this.begin_timers =function(){
@@ -134,12 +155,13 @@ this.begin_timers =function(){
     setInterval(function(){
   for (var i = 0; i < that.users_algorithms.length; i ++){
 
-      if (that.counter > 0){
+      if (that.users_algorithms[i].time_to_resubmit > 0){
       //  localTimer = localTimer -10000;
-        if (typeof(that.users_algorithms[i].restart_time) == "string"){
-          that.users_algorithms[i].restart_time = new Date(that.users_algorithms[i].restart_time);
-        }
-        that.users_algorithms[i].restart_time -= new Date(1000);
+        // if (typeof(that.users_algorithms[i].restart_time) == "string"){
+        //   that.users_algorithms[i].restart_time = new Date(that.users_algorithms[i].restart_time);
+        // }
+        console.log((that.users_algorithms[i].time_to_resubmit));
+        that.users_algorithms[i].time_to_resubmit -= 1000;
         // console.log(that.users_algorithms[i].restart_time);
         // console.log(that.counter);
         that.counter -=1;

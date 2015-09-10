@@ -20,9 +20,9 @@ algorithm_app.controller('adminController', function($scope,$routeParams, $locat
 
   that.prev_solution_unlock_keystrokes = 1000;
   that.prev_solution_unlock_timer = 24000000;
-  that.resubmit_after = 1;
-  that.degradation_rate = 2400;
-  that.time_allowed = 60;
+  that.resubmit_after = 60000; // 1 minute
+  that.degradation_rate = 36000000000; // 1000 hrs
+  that.time_allowed = 36000000; //1 hr
   that.type_of = "Choose one: Array, Linked_List, Data Structure, Library, String, Other";
 
 
@@ -92,13 +92,14 @@ algorithm_app.controller('adminController', function($scope,$routeParams, $locat
       that.algorithm['solution'] =solution.editor.getValue();
     }
     if (that.algorithm['hint1_time']&&  that.algorithm['hint2_time'] && that.algorithm['hint3_time'] && that.algorithm['prev_solution_unlock_time'] && that.algorithm['resubmit_after'] &&   that.algorithm['degradation_rate'] && that.algorithm['time_allowed'] ){
-      that.algorithm['hint1_time'] = new Date(that.algorithm['hint1_time']*1);
-      that.algorithm['hint2_time'] = new Date(that.algorithm['hint2_time']*1);
-      that.algorithm['hint3_time'] = new Date(that.algorithm['hint3_time']*1);
-      that.algorithm['prev_solution_unlock_time'] = new Date(that.algorithm['prev_solution_unlock_time']*1);
-      that.algorithm['resubmit_after'] = new Date((that.algorithm['resubmit_after'])*60000);
-      that.algorithm['degradation_rate'] = new Date(that.algorithm['degradation_rate']*3600000);
-      that.algorithm['time_allowed'] =new Date(that.algorithm['time_allowed']*60000);
+      //add if statements here as to whether these have been set to reasonable parameters otherwise they keep multiplying everytime you fail a submit!
+      that.algorithm['hint1_time'] = that.algorithm['hint1_time']*1;
+      that.algorithm['hint2_time'] = that.algorithm['hint2_time']*1;
+      that.algorithm['hint3_time'] = that.algorithm['hint3_time']*1;
+      that.algorithm['prev_solution_unlock_time'] = that.algorithm['prev_solution_unlock_time']*1;
+      that.algorithm['resubmit_after'] = that.algorithm['resubmit_after']*1;
+      that.algorithm['degradation_rate'] = that.algorithm['degradation_rate']*1;
+      that.algorithm['time_allowed'] =that.algorithm['time_allowed']*1;
 
     }
       algorithmFactory.create(that.algorithm, function(data){console.log("and I am back");});

@@ -27,6 +27,18 @@ module.exports = (function() {
           res.json({"create":"true"});
         }
       });
+    },
+
+    update: function(req,res){
+      req.body.updated_at = Date.now();
+      Algorithm.update({_id:req.params.id},{$set: req.body},function (err,data){
+        if (err) {return "fail";}
+        res.json(data);
+      });
+    },
+
+    update_algorithm: function(req,res){
+
     }
   }
 })();

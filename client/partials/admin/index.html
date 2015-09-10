@@ -26,8 +26,19 @@
   </div>
 </div>
 
-<div class = 'row' ng-if = "admin.algorithm_index_bool" ng-repeat = "algorithm in algorithm.algorithms">
-  <p> I am an algorithm </p>
+<div class = 'row' ng-if = "admin.algorithm_index_bool" ng-repeat = "specific_algorithm in algorithm.algorithms">
+  <div class = " col m2">
+    <p ng-bind = "specific_algorithm.title"></p>
+  </div>
+  <div class = "col m2 offset-m6">
+    <p><a class = "" href = "#/algorithms/{{specific_algorithm._id}}/edit"  ng-click = "algorithm.edit_algorithm(specific_algorithm)">Edit</a></p>
+  </div>
+
+  <div class = "col m2">
+    <p><a class = "" href = "#/algorithms/delete/{{specific_algorithm._id}}" ng-click = "algorithm.edit_algorithm()">Delete</a></p>
+  </div>
+
+
 </div>
 
 <div class = 'row' ng-if = "admin.algorithm_new_bool">
@@ -166,13 +177,13 @@
         <div class="input-field col s4">
           <input id="time_allowed" ng-model = "admin.algorithm.time_allowed" type="text" name = "time_allowed" ng-value = "admin.time_allowed"
           placeholder = "how long they have to do the problem">
-          <label for="time_allowed">Time Before AutoSubmit(minutes)</label>
+          <label for="time_allowed">Time Before AutoSubmit(ms)</label>
         </div>
 
 
         <div class="input-field col s4">
           <input id="resubmit_after" type="text" ng-model = "admin.algorithm.resubmit_after" name = "resubmit_after" ng-value = "admin.resubmit_after" placeholder = "time after submission that a person can try again">
-          <label for="resubmit_after">cooldown(minutes)</label>
+          <label for="resubmit_after">cooldown(ms)</label>
         </div>
 
 
@@ -189,7 +200,7 @@
         </div>
         <div class="input-field col s6">
           <input id="degradation_rate" ng-model = "admin.algorithm.degradation_rate" type="text" ng-value = "admin.degradation_rate" placeholder = "how long until the stars reset" name = "degradation_rate">
-          <label for="degradation_rate">Degradation Rate (for badges) # of hours</label>
+          <label for="degradation_rate">Degradation Rate (for badges) ms(default 100 days of ms)</label>
         </div>
       </div>
     </form>
