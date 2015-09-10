@@ -14,7 +14,7 @@ var test_code_bool = false;
 var solution_code_bool = false;
 
 function load_info(){
-  if (solution.editor.getValue().length < 1){
+  if (test_code.editor.getValue().length < 1){
   var data = $('[ng-controller="algorithmController as algorithm"]').scope().algorithm.show_algorithm;
   solution.editor.setValue(data.solution);
   starting_code.editor.setValue(data.starting_code);
