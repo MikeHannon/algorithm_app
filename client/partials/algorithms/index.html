@@ -31,7 +31,7 @@
                     <div class="card-content white-text left-align">
                       <p class="card-content  yellow-text center-align" ng-bind = "algo.title"> </p>
                       <p class="card-content center-align" ng-if = "user.algorithm_unlocked(algo._id) == -1;">Locked </p>
-                      <div  ng-if = "user.algorithm_unlocked(algo._id) !== -1 && user.algo_up_to_date(algo.updated_at)">
+                      <div  ng-if = "user.algorithm_unlocked(algo._id) !== -1 && user.algo_up_to_date(algo.updated_at, algo._id)">
                         <p class="card-content center-align"> Time Left To Solve: <span ng-bind = "user.is_algorithm(algo._id).time_spent | duration"></span><p>
                         <p class="card-content center-align"> Time Until Restart: <span ng-bind = "user.is_algorithm(algo._id).time_to_resubmit | duration" ></span><p>
 
@@ -42,8 +42,8 @@
                     <div class="card-action center-align">
 
                       <a ng-if = "user.algorithm_unlocked(algo._id) == -1;" href="#/challenges/{{algo._id}}" ng-click = "algorithm.show_algorithm_html(algo); user.initiate_algorithm(user.user.user_id, algo)" class="waves-effect waves-light btn"><i class="mdi-action-lock-outline left"></i>Unlock</a>
-                      <a ng-if = "user.algorithm_unlocked(algo._id) != -1 &&  user.algo_up_to_date(algo.updated_at)" href="#/challenges/{{algo._id}}" ng-click = "algorithm.show_algorithm_html(algo, user.algorithm_unlocked(algo._id))" class = "center-align">Continue</a>
-                      <a ng-if = "!user.algo_up_to_date(algo.updated_at)" href="#/algorithms" ng-click = " user.algorithm_reunlock(algo)" class = "center-align">Updated, ReUnlock</a>
+                      <a ng-if = "user.algorithm_unlocked(algo._id) != -1 &&  user.algo_up_to_date(algo.updated_at, algo._id)" href="#/challenges/{{algo._id}}" ng-click = "algorithm.show_algorithm_html(algo, user.algorithm_unlocked(algo._id)); user.set_active_algorithm(algo._id)" class = "center-align">Continue</a>
+                      <a ng-if = "!user.algo_up_to_date(algo.updated_at, algo._id)" href="#/algorithms" ng-click = " user.algorithm_reunlock(algo)" class = "center-align">Updated, ReUnlock</a>
                     </div>
                   </div>
                 </div>

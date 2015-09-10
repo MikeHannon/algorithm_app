@@ -14,6 +14,7 @@ algorithm_app.controller('usersController', function($scope,$routeParams, $locat
   console.log($cookies.get("first_name"));
   this.users = [];
   this.users_algorithms = [];
+  this.active_algorithm = {};
 
 
 
@@ -91,7 +92,16 @@ algorithm_app.controller('usersController', function($scope,$routeParams, $locat
     });
   }
 
-
+this.set_active_algorithm = function(algo_id){
+  if (that.users_algorithms){
+    for (var i = 0; i < that.users_algorithms.length; i ++){
+      if (that.users_algorithms[i].algo_id == algo_id){
+        that.active_algorithm = that.users_algorithms[i];
+        that.algorithm_timer();
+      }
+    }
+  }
+}
 
 this.algorithm_unlocked = function(algorithm_id){
 //console.log(algorithm_id);
@@ -107,12 +117,15 @@ this.algorithm_unlocked = function(algorithm_id){
   return -1;
 }
 
-this.algo_up_to_date = function(algorithm_updated){
-  // console.log(algorithm_updated);
+this.algo_up_to_date = function(algorithm_updated, algo_id){
+  //console.log(algorithm_updated);
+
   if (that.users_algorithms){
     for (var i = 0; i < that.users_algorithms.length; i ++){
-      if (that.users_algorithms[i].created_at < algorithm_updated){
-        return false;
+      if (that.users_algorithms[i].algo_id == algo_id){
+        if (that.users_algorithms[i].created_at < algorithm_updated){
+          return false;
+        }
       }
     }
   }
@@ -148,9 +161,29 @@ function set_users(data){
   that.user = data;
   that.users_algorithms_index();
 }
+this.algorithm_timer = function(){
+  setInterval(function(){
+
+    if (that.active_algorithm.time_spent > 0){
+      console.log(that.active_algorithm.time_spent);
+    //  localTimer = localTimer -10000;
+      // if (typeof(that.users_algorithms[i].restart_time) == "string"){
+      //   that.users_algorithms[i].restart_time = new Date(that.users_algorithms[i].restart_time);
+      // }
+
+      that.active_algorithm.time_spent -= 1000;
+      // console.log(that.users_algorithms[i].restart_time);
+      // console.log(that.counter);
+
+      $scope.$apply();
+    }
+    else {(clearInterval(this));}
+
+  },1000);
+}
 
 this.begin_timers =function(){
-  var myArray = [];
+  //var myArray = [];
 
     setInterval(function(){
   for (var i = 0; i < that.users_algorithms.length; i ++){
