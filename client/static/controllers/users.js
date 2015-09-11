@@ -15,6 +15,8 @@ algorithm_app.controller('usersController', function($scope,$routeParams, $locat
   this.users = [];
   this.users_algorithms = [];
   this.active_algorithm = {};
+  this.IndexTimers = [];
+  this.ShowTimers = [];
 
 
 
@@ -162,37 +164,28 @@ function set_users(data){
   that.users_algorithms_index();
 }
 this.algorithm_timer = function(){
-  setInterval(function(){
+  if (that.IndexTimers.length == 0){
+    that.IndexTimers.push(
+    setInterval(function(){
+      if (that.active_algorithm.time_spent > 0){
+        that.active_algorithm.time_spent -= 1000;
+        $scope.$apply();
+      }
+      else {(clearInterval(this));}
 
-    if (that.active_algorithm.time_spent > 0){
-      console.log(that.active_algorithm.time_spent);
-    //  localTimer = localTimer -10000;
-      // if (typeof(that.users_algorithms[i].restart_time) == "string"){
-      //   that.users_algorithms[i].restart_time = new Date(that.users_algorithms[i].restart_time);
-      // }
-
-      that.active_algorithm.time_spent -= 1000;
-      // console.log(that.users_algorithms[i].restart_time);
-      // console.log(that.counter);
-
-      $scope.$apply();
-    }
-    else {(clearInterval(this));}
-
-  },1000);
+    },1000));
+  }
 }
 
 this.begin_timers =function(){
   //var myArray = [];
-
+  if (that.ShowTimers.length == 0){
+    that.ShowTimers.push(
     setInterval(function(){
   for (var i = 0; i < that.users_algorithms.length; i ++){
 
       if (that.users_algorithms[i].time_to_resubmit > 0){
-      //  localTimer = localTimer -10000;
-        // if (typeof(that.users_algorithms[i].restart_time) == "string"){
-        //   that.users_algorithms[i].restart_time = new Date(that.users_algorithms[i].restart_time);
-        // }
+
         console.log((that.users_algorithms[i].time_to_resubmit));
         that.users_algorithms[i].time_to_resubmit -= 1000;
         // console.log(that.users_algorithms[i].restart_time);
@@ -202,7 +195,7 @@ this.begin_timers =function(){
       }
       else {(clearInterval(this));}
     }
-    },1000);
+  },1000))}
   }
 
 
