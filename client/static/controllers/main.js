@@ -54,5 +54,29 @@ algorithm_app.controller('mainController', function($scope,$routeParams, $locati
       that.evaluate = {function: editor};
     });
   }
+  this.show_hint = function(data, kind){
+      console.log(data);
+      var data2;
+    //  if (typeof(hints) == undefined){
+        hints = new Editor("hints","text");
+        if (kind == 1){
+          data2 = hints.editor.getValue() + "\n" + data;
+        }
+        if (kind == 2){
+            data2 = hints.editor.getValue() + "\n Go to url:" + data;
+        }
+        hints.editor.setValue(data2);
+        //console.log(get.Elem)
+        //$timeout(function() {
+            $('#hint_tab').click();
+          //$('#console_tab').click();
+    //    }, 100);
+
+      // console.log(typeof(hints));
+      // var current_data = hints.editor.getValue();
+      // current_data += "</br>" +  data;
+      // hints.editor.setValue(current_data);
+
+  }
 
 });

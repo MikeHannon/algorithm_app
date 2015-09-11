@@ -30,7 +30,11 @@
     <i class="tiny material-icons">star </i>:&nbsp;<span ng-bind = "algorithm.show_algorithm.Onestar"></span>
     <p ng-bind = "algorithm.show_algorithm.Evaluation"></p>
     <p>time Left: <b><span ng-bind = "user.active_algorithm.time_spent | duration"></span></b>
-    &nbsp;&nbsp;&nbsp; first hint: <b><span ng-if = "(user.active_algorithm.time_spent - algorithm.show_algorithm.hint1_time) > 0" ng-bind = "(user.active_algorithm.time_spent - algorithm.show_algorithm.hint1_time)|duration"></span></b><span ng-if = "(user.active_algorithm.time_spent - algorithm.show_algorithm.hint1_time) <= 0">First Hint</span>   &nbsp;&nbsp;&nbsp; second hint: <b><span ng-if = "(user.active_algorithm.time_spent - algorithm.show_algorithm.hint2_time) > 0" ng-bind = "(user.active_algorithm.time_spent - algorithm.show_algorithm.hint2_time)|duration"></span><span ng-if = "(user.active_algorithm.time_spent - algorithm.show_algorithm.hint2_time) <= 0">Second Hint</span></b> </p>
+    &nbsp;&nbsp;&nbsp; first hint: <b><span ng-if = "(user.active_algorithm.time_spent - algorithm.show_algorithm.hint1_time) > 0" ng-bind = "(user.active_algorithm.time_spent - algorithm.show_algorithm.hint1_time)|duration"></span></b>
+      <a class = "btn" ng-if = "(user.active_algorithm.time_spent - algorithm.show_algorithm.hint1_time) <= 0" ng-click = "main.show_hint(algorithm.show_algorithm.hint1,1)">First Hint
+      </a>   &nbsp;&nbsp;&nbsp; second hint:
+      <b><span ng-if = "(user.active_algorithm.time_spent - algorithm.show_algorithm.hint2_time) > 0" ng-bind = "(user.active_algorithm.time_spent - algorithm.show_algorithm.hint2_time)|duration"></span><a class = "btn" ng-if = "(user.active_algorithm.time_spent - algorithm.show_algorithm.hint2_time) <= 0" ng-click = "main.show_hint(algorithm.show_algorithm.hint2,2)"> Second Hint
+    </a></b> </p>
   </div>
 </div>
 
