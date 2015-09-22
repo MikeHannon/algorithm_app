@@ -87,7 +87,8 @@ algorithm_app.controller('usersController', function($scope,$routeParams, $locat
   }
 
   this.users_algorithms_index = function(){
-    usersFactory.users_algorithms(that.user.user_id,function(data){
+    usersFactory.users_algorithms(that.user._id,function(data){
+      console.log(that.user);
       that.users_algorithms=data;
       console.log(that.users_algorithms,"user_algorithms!");
       that.begin_timers();
@@ -108,6 +109,7 @@ this.set_active_algorithm = function(algo_id){
 this.algorithm_unlocked = function(algorithm_id){
 //console.log(algorithm_id);
 //console.log(that.users_algorithms);
+
   if (that.users_algorithms){
     for (var i = 0; i < that.users_algorithms.length; i ++){
         //console.log(that.users_algorithms[i]._id);
@@ -161,6 +163,7 @@ function set_users(data){
   $cookies.put('updated_at', data.updated_at);
   $cookies.put('user_id', data._id);
   that.user = data;
+  usersFactory.setUser(data);
   that.users_algorithms_index();
 }
 this.algorithm_timer = function(){
@@ -186,8 +189,9 @@ this.begin_timers =function(){
 
       if (that.users_algorithms[i].time_to_resubmit > 0){
 
-        console.log((that.users_algorithms[i].time_to_resubmit));
+        //console.log((that.users_algorithms[i].time_to_resubmit));
         that.users_algorithms[i].time_to_resubmit -= 1000;
+
         // console.log(that.users_algorithms[i].restart_time);
         // console.log(that.counter);
         that.counter -=1;
@@ -224,7 +228,7 @@ this.check_login = function(){
     that.user['first_name'] = $cookies.get("first_name");
     that.user['email'] = $cookies.get("email");
     that.user['admin_level'] = $cookies.get("admin_level");
-    that.user['user_id'] = $cookies.get("user_id");
+    that.user['_id'] = $cookies.get("user_id");
     $location.path("/algorithms");
     that.login_errors = null;
     that.users_algorithms_index();

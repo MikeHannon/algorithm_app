@@ -2,7 +2,14 @@ algorithm_app.factory('usersFactory', function($http) {
   var factory = {};
   var users = [];
   var users_algorithms = [];
-  console.log(factory, "I am a factory");
+  var user = {};
+  factory.setUser = function(user_data){
+    user = user_data;
+    this.users_algorithms(user.user_id,function(data){console.log(data);});
+  //  this.index;
+    console.log(user, "I AM USER");
+  }
+//  console.log(factory, "I am a factory");
   factory.index = function(callback){
    $http.get('/users').success(function(output) {
       users = output;
@@ -34,9 +41,30 @@ algorithm_app.factory('usersFactory', function($http) {
     algorithm_info['solution_efficiency'] = 0;
     console.log(algorithm_info, "algo_info!");
     $http.post('/users/'+user_id+'/'+algo._id, algorithm_info).then(function(output){
-      console.log(output), function(){console.log("ERRROR");};
+      console.log(output), function(){console.log("ERROR");};
     });
-  }
+  }// I AM HERE!
+
+  factory.scoreAlgorithm = function(hints, algorithm){
+    console.log(hints, algorithm);
+    for (var i = 0; i < users_algorithms.length; i ++){
+      console.log(users_algorithms[i].algo_id);
+      if (users_algorithms[i].algo_id == algorithm._id){
+        console.log(user);
+        if (hints == 0){users_algorithms[i].solution_efficiency = 3;}
+        else if (hints == 1){users_algorithms[i].solution_efficiency = 2;}
+        else if (hints == 2){users_algorithms[i].solution_efficiency = 1;}
+        else {users_algorithms[i].solution_efficiency = 0;}
+
+        // $http.patch('/users/'+user_id+'/'+algorithm_id._id, algorithm_info).then(function(output){
+        //   console.log(output), function(){console.log("ERROR");};
+        // });
+        break;
+        //console.log(users_algorithms[i]);
+      }
+    }
+  //  console.log(users_algorithms);
+  };
 
   factory.update_algorithm = function(user_id, algorithm_id){
     console.log(user_id);
@@ -54,7 +82,7 @@ algorithm_app.factory('usersFactory', function($http) {
     algorithm_info['solution_efficiency'] = 0;
     console.log(algorithm_info, "algo_info!");
     $http.patch('/users/'+user_id+'/'+algorithm_id._id, algorithm_info).then(function(output){
-      console.log(output), function(){console.log("ERRROR");};
+      console.log(output), function(){console.log("ERROR");};
     });
 
 
@@ -95,7 +123,7 @@ algorithm_app.factory('usersFactory', function($http) {
   // get all info
   factory.users_algorithms = function(user_id, callback){
     $http.post("/users_algorithms/"+user_id).then(function(data){
-        console.log(data.data.users_algorithms.algorithm);
+      //  console.log(data.data.users_algorithms.algorithm);
         users_algorithms = data.data.users_algorithms.algorithm;
         callback(users_algorithms);
 

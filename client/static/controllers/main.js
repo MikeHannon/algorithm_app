@@ -1,4 +1,4 @@
-algorithm_app.controller('mainController', function($scope,$routeParams, $location, $timeout, algorithmFactory) {
+algorithm_app.controller('mainController', function($scope,$routeParams, $location, $timeout, algorithmFactory, usersFactory) {
   var that = this;
   that.hints =0;
   that.type = 0;
@@ -7,11 +7,13 @@ algorithm_app.controller('mainController', function($scope,$routeParams, $locati
 
   this.evaluate = {};
 
-  this.show_evaluations = function(assignment_test){
+  this.show_evaluations = function(assignment_test, user){
     that.type = 1;
-    //event.stopPropagation();
-    console.log(assignment_test);
-    var data = that.evaluate.function.editor.getValue() + assignment_test;
+    console.log(user);
+
+    console.log(assignment_test.test_code);
+    var data = that.evaluate.function.editor.getValue() + assignment_test.test_code;
+    //catches failures!
     evaluate_and_console_log2(data, function(data){
       var failed = "failure";
       var failure_counter = 0;
@@ -21,7 +23,9 @@ algorithm_app.controller('mainController', function($scope,$routeParams, $locati
         }
       }
       if (failure_counter == 0){
-        console.log("success");
+        //console.log("success");
+
+        usersFactory.scoreAlgorithm(that.hints, assignment_test);
       }
     });
     //submit
@@ -67,7 +71,7 @@ algorithm_app.controller('mainController', function($scope,$routeParams, $locati
     });
   }
   this.show_hint = function(data, kind){
-    that.hint ++;
+    that.hints ++;
       console.log(data);
       var data2;
     //  if (typeof(hints) == undefined){

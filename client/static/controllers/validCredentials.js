@@ -1,6 +1,6 @@
 
 
-algorithm_app.controller('validCredentials', function($scope,$routeParams, $location, $timeout, $cookies) {
+algorithm_app.controller('validCredentials', function($scope,$routeParams, $location, $timeout, $cookies, usersFactory) {
   var that = this;
   this.user = {};
   this.login_errors;
@@ -14,9 +14,10 @@ algorithm_app.controller('validCredentials', function($scope,$routeParams, $loca
       that.user['first_name'] = $cookies.get("first_name");
       that.user['email'] = $cookies.get("email");
       that.user['admin_level'] = $cookies.get("admin_level");
-      that.user['user_id'] = $cookies.get("user_id");
+      that.user['_id'] = $cookies.get("user_id");
       // $location.path("/algorithms");
       that.login_errors = null;
+      usersFactory.setUser(that.user);
     }
     else {
       $cookies.remove("first_name");

@@ -18,9 +18,11 @@ server.listen(8000, function() {
 
 var io = require('socket.io')(server);
 
+
 io.sockets.on('connection', function (socket) {
   socket.on("chat_input", function(data){console.log(data);
-    socket.emit("self_chat_return", data);
-    socket.broadcast.emit("return_chat",data);
+//socket.emit("self_chat_return", data); // you
+    socket.broadcast.emit("return_chat",data); //instructor to everyone but me
+    io.emit("return_chat",data); // instructor to everyone
   });
 })

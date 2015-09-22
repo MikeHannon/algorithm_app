@@ -13,7 +13,7 @@ var algorithms = new mongoose.Schema({
   threestartime:'number',
   time_to_resubmit:'number',
   date_started:{type:Date,default:Date.now}, // for our timers...
-  solution_efficiency:'number',
+  solution_efficiency:'number', // score! 
   keyStrokes:"number",
   restart_time:'Date'
 });
