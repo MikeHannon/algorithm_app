@@ -19,6 +19,10 @@ algorithm_app.controller('usersController', function($scope,$routeParams, $locat
   this.ShowTimers = [];
 
 
+  this.number_of_times = function(n){
+    return new Array(n);
+  }
+
 
 //   console.log(last_login);
 // //  console.log(new Date(last_login).getMilliseconds());

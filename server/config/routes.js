@@ -24,6 +24,12 @@ module.exports = function(app) {
     Users.update_algorithm(req,res);
     //res.json({"hello":"worldinput"});
   });
+  app.patch('/users2/:user_id/:algo_id',function(req,res){
+    console.log("hello");
+    Users.update_algorithm2(req,res);
+  //  Users.update_algorithm(req,res);
+    //res.json({"hello":"worldinput"});
+  });
 
   app.post('/users_algorithms/:user_id', function(req,res){
     Users.get_algorithms(req,res);

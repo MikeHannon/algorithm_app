@@ -50,15 +50,15 @@ algorithm_app.factory('usersFactory', function($http) {
     for (var i = 0; i < users_algorithms.length; i ++){
       console.log(users_algorithms[i].algo_id);
       if (users_algorithms[i].algo_id == algorithm._id){
-        console.log(user);
-        if (hints == 0){users_algorithms[i].solution_efficiency = 3;}
-        else if (hints == 1){users_algorithms[i].solution_efficiency = 2;}
-        else if (hints == 2){users_algorithms[i].solution_efficiency = 1;}
-        else {users_algorithms[i].solution_efficiency = 0;}
+        console.log(user, "I AM A USER");
+        if (hints == 0){users_algorithms[i].score = 3;}
+        else if (hints == 1){users_algorithms[i].score = 2;}
+        else if (hints == 2){users_algorithms[i].score = 1;}
+        else {users_algorithms[i].score = 0;}
 
-        // $http.patch('/users/'+user_id+'/'+algorithm_id._id, algorithm_info).then(function(output){
-        //   console.log(output), function(){console.log("ERROR");};
-        // });
+        $http.patch('/users2/'+user._id+'/'+users_algorithms[i]._id, users_algorithms[i]).then(function(output){
+          console.log(output), function(){console.log("ERROR");};
+        });
         break;
         //console.log(users_algorithms[i]);
       }

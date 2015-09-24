@@ -23,7 +23,6 @@ module.exports = (function() {
             res.json({"errors":"user_name or password don't match"});
           }
           else {
-
             var myinfo = {"first_name":user_info.first_name, "admin_level":user_info.admin_level, "updated_at":Date.now(),
             "email":user_info.email, "_id":user_info._id}
             res.json(myinfo);
@@ -100,7 +99,24 @@ module.exports = (function() {
         }
       });
     },
+    update_algorithm2:function(req,res){
 
+      var user = User.findOne({_id:req.params.user_id}, function(err, user){
+        if (err){console.log(err);}
+        for (var i = 0; i < user.algorithm.length; i ++){
+          //console.log(user.algorithm[i].algo_id);
+          if (user.algorithm[i].algo_id == req.body.algo_id){
+          //  console.log("I am here", req.body.score, user.algorithm[i].algo_id);
+            user.algorithm[i].score = req.body.score;
+            User.findOneAndUpdate({_id:user._id}, {$set:{algorithm:user.algorithm}},function (err,data){
+              if (err) {return "fail";}
+              res.json(data);
+            });
+
+          }
+        }
+      });
+    },
     update_algorithm: function(req,res){
       console.log(req.body.algo_id, "here");
       var user = User.findOne({_id:req.params.user_id}, function(err, user){
