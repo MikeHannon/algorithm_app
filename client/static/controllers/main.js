@@ -25,6 +25,7 @@ algorithm_app.controller('mainController', function($scope,$routeParams, $locati
         //console.log("success");
 
         usersFactory.scoreAlgorithm(that.hints, assignment_test);
+        that.hints =0;
       }
     });
     //submit
