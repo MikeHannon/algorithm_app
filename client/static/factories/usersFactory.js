@@ -122,13 +122,14 @@ algorithm_app.factory('usersFactory', function($http) {
   }
   // get all info
   factory.users_algorithms = function(user_id, callback){
+    if (user_id){
     $http.post("/users_algorithms/"+user_id).then(function(data){
       //  console.log(data.data.users_algorithms.algorithm);
         users_algorithms = data.data.users_algorithms.algorithm;
         callback(users_algorithms);
 
     }, function(){});
-
+    }
 
   }
 
