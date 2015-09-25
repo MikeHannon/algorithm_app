@@ -172,15 +172,16 @@ function set_users(data){
 }
 this.algorithm_timer = function(){
   if (that.IndexTimers.length == 0){
-    that.IndexTimers.push(
-    setInterval(function(){
-      if (that.active_algorithm.time_spent > 0){
-        that.active_algorithm.time_spent -= 1000;
-        $scope.$apply();
-      }
-      else {(clearInterval(this));}
+    //move timers to a factory!
+    var t =  setInterval(function(){
+          if (that.active_algorithm.time_spent > 0){
+            that.active_algorithm.time_spent -= 1000;
+            $scope.$apply();
+          }
+          else {(clearInterval(this));}
 
-    },1000));
+        },1000);
+    that.IndexTimers.push(t);
   }
 }
 
