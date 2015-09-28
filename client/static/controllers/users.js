@@ -260,6 +260,7 @@ $scope.$watch('that.counter', function () {
  window.onbeforeunload = function(event) {
     console.log(that.users_algorithms[0].time_to_resubmit);
     console.log(that.users_algorithms[0].time_spent);
+    usersFactory.unloadPage(that.users_algorithms, that.user._id);
     event.returnValue = that.user.first_name;
 };
   // this.deleteUser = usersFactory.createUser(data, function(data){that.users = data});

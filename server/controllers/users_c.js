@@ -41,7 +41,7 @@ module.exports = (function() {
       }
       else {req.body["admin_level"] = 0;
       }
-      console.log(req.body);
+    //  console.log(req.body);
       req.body['created_at'] = Date.now();
       req.body['updated_at'] = Date.now();
       user = new User(req.body);
@@ -83,7 +83,7 @@ module.exports = (function() {
       console.log("in the controller");
       var user = User.findOne({_id:req.params.user_id}, function(err, user){
         if (err){console.log(err);}
-        else {console.log(user);
+        else {//console.log(user);
         user.algorithm.push(req.body);
         user.save();
         }
@@ -140,6 +140,17 @@ module.exports = (function() {
         //}
       //console.log("I am here now");
       });
+    },
+    update_algorithm3:function(req,res){
+      console.log(req.body, "BODY");
+      var algorithm = req.body;
+      console.log(algorithm);
+      console.log(req.params, "PARAMS");
+      User.findOneAndUpdate({_id:req.params.id}, {$set:{algorithm:algorithm}},function (err,data){
+        if (err) {return "fail";}
+        res.json(data);
+      });
+
     },
   }
 })();

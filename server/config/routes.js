@@ -76,5 +76,9 @@ module.exports = function(app) {
   app.delete('/users/:id', function(req,res){
   res.json({"hello": req.params.id});
   });
-
+  app.patch('/users_algos/:id', function(req,res){
+    Users.update_algorithm3(req,res);
+    console.log("????");
+    console.log(req.params);
+  });
 }

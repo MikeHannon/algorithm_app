@@ -132,8 +132,11 @@ algorithm_app.factory('usersFactory', function($http) {
     }
 
   }
-
-
+  factory.unloadPage = function(algo, user_id){
+    console.log(algo);
+    console.log(user_id);
+    $http.patch("/users_algos/"+user_id, algo).then(function(data){}), function(){};
+  };
 
 return factory;
 });
