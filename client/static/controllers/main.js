@@ -105,4 +105,9 @@ algorithm_app.controller('mainController', function($scope,$routeParams, $locati
   that.endScore = function(){
     console.log("end!");
   }
+  that.reset_algorithm = function(algo, user){
+    console.log(algo);
+    console.log(user);
+    that.evaluate.function.editor.setValue(algo.starting_code);
+  }
 });

@@ -27,9 +27,16 @@
 
  #submit_answer{
    position: absolute;
-   left: 150px;
+   left: 80px;
    bottom: 3px;
    border-radius: 6px;
+ }
+ #reset_button{
+   position: absolute;
+   left: 200px;
+   bottom: 3px;
+   border-radius: 6px;
+
  }
 
  #modes{
