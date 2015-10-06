@@ -16,16 +16,17 @@ module.exports = function(app) {
   });
 //new
   app.post('/users/:user_id/:algo_id',function(req,res){
+    console.log(req.body, "unlocking this!");
     Users.create_algorithm(req,res);
     //res.json({"hello":"worldinput"});
   });
   app.patch('/users/:user_id/:algo_id',function(req,res){
-    console.log("hello");
+    //console.log("hello");
     Users.update_algorithm(req,res);
     //res.json({"hello":"worldinput"});
   });
   app.patch('/users2/:user_id/:algo_id',function(req,res){
-    console.log("hello");
+    //console.log("hello");
     Users.update_algorithm2(req,res);
   //  Users.update_algorithm(req,res);
     //res.json({"hello":"worldinput"});
@@ -33,7 +34,7 @@ module.exports = function(app) {
 
   app.post('/users_algorithms/:user_id', function(req,res){
     Users.get_algorithms(req,res);
-    console.log(req.params.user_id);
+    console.log(req.params.user_id, "I AM PARAMS");
   });
 
 

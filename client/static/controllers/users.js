@@ -1,17 +1,17 @@
-algorithm_app.controller('usersController', function($scope,$routeParams, $location,$interval, $timeout, $cookies, usersFactory) {
+algorithm_app.controller('usersController', function($scope,$routeParams, $location,$interval, $timeout, $cookies, usersFactory, algorithmFactory) {
   var that = this;
   this.user = {};
   this.login_errors;
   this.registration_errors;
   this.counter = 100;
-  var stop;
+  //var stop;
 
 //this.begin_countdowh();
 
 
-  console.log($cookies);
-  console.log($cookies.getAll(),"my cookies");
-  console.log($cookies.get("first_name"));
+  // console.log($cookies);
+  // console.log($cookies.getAll(),"my cookies");
+  // console.log($cookies.get("first_name"));
   this.users = [];
   this.users_algorithms = [];
   this.active_algorithm = {};
@@ -35,8 +35,10 @@ algorithm_app.controller('usersController', function($scope,$routeParams, $locat
     usersFactory.login(user_info, function(data){
     //  console.log(data);
       if (data.errors){that.login_errors = data;
-      console.log(that.login_errors);}
+    //  console.log(that.login_errors);
+      }
       else {
+        console.log(data);
         set_users(data);
         that.login_errors = null;
         that.users_algorithms_index();
@@ -64,16 +66,17 @@ algorithm_app.controller('usersController', function($scope,$routeParams, $locat
     user_info['token']=213421512341234;
   //  console.log(user_info);
     usersFactory.register(user_info, function(data){
-    //  console.log(data);
+     console.log(data, "FROM FACTORY!!!");
       if (data.errors){
         that.registration_errors = data.errors;
       }
       else {
-      //  console.log(data);
+        console.log(data);
       //  data['user_id']=data._id;
         set_users(data);
         that.login_errors = null;
         that.users_algorithms_index();
+          console.log(data);
         $location.path("/algorithms");
 
       }
@@ -83,18 +86,20 @@ algorithm_app.controller('usersController', function($scope,$routeParams, $locat
   }
 
   this.initiate_algorithm = function(user_id, algo){
-    console.log(algo,"from initiate");
+  //  console.log(algo,"from initiate");
     usersFactory.initiate_algorithm(user_id,algo,function(data){
+    that.users_algorithms_index();
+     console.log(user_id);
 
-     //console.log(data);
+
     });
   }
 
   this.users_algorithms_index = function(){
     usersFactory.users_algorithms(that.user._id,function(data){
-      console.log(that.user);
+      // console.log(that.user);
       that.users_algorithms=data;
-      console.log(that.users_algorithms,"user_algorithms!");
+      // console.log(that.users_algorithms,"user_algorithms!");
       that.begin_timers();
     });
   }
@@ -104,6 +109,7 @@ this.set_active_algorithm = function(algo_id){
     for (var i = 0; i < that.users_algorithms.length; i ++){
       if (that.users_algorithms[i].algo_id == algo_id){
         that.active_algorithm = that.users_algorithms[i];
+        algorithmFactory.set_single(that.active_algorithm);
         that.algorithm_timer();
       }
     }
@@ -140,8 +146,15 @@ this.algo_up_to_date = function(algorithm_updated, algo_id){
   return true;
 }
 this.algorithm_reunlock = function(algorithm_info){
-  console.log(algorithm_info);
-  usersFactory.update_algorithm(that.user.user_id, algorithm_info);
+  // console.log(algorithm_info, "ALGO ID");
+  // console.log(that.user._id, "USERSSSS");
+  if (that.user && that.user._id){
+    that.check_login();
+    //console.log(that.user._id);
+    usersFactory.update_algorithm(that.user._id, algorithm_info,that.users_algorithms_index );
+
+  }
+
 }
 
 this.is_algorithm = function(algorithm_id){
@@ -170,6 +183,7 @@ function set_users(data){
   usersFactory.setUser(data);
   that.users_algorithms_index();
 }
+// COUNT DOWN TIMER
 this.algorithm_timer = function(){
   if (that.IndexTimers.length == 0){
     //move timers to a factory!
@@ -178,13 +192,30 @@ this.algorithm_timer = function(){
             that.active_algorithm.time_spent -= 1000;
             $scope.$apply();
           }
-          else {(clearInterval(this));}
+          else {
+          //  console.log("TIMER DONE");
+            that.reset_these_timers();
+            (clearInterval(this));}
 
         },1000);
     that.IndexTimers.push(t);
+  //  console.log(that.IndexTimers);
+
   }
 }
+//
+this.reset_these_timers= function(){
 
+  if (that.IndexTimers){
+
+    for (var i = that.IndexTimers.length-1; i >= 0; i --){
+      $('#submit_answer').click();
+      clearInterval(that.IndexTimers[i]);
+
+    }
+  }
+}
+//RESUBMISSION TIMER
 this.begin_timers =function(){
   //var myArray = [];
   if (that.ShowTimers.length == 0){
@@ -202,7 +233,9 @@ this.begin_timers =function(){
         that.counter -=1;
         $scope.$apply();
       }
-      else {(clearInterval(this));}
+      else {
+
+        (clearInterval(this));}
     }
   },1000))}
   }
@@ -251,15 +284,15 @@ this.check_login = function(){
 this.check_login();
 
 $scope.$watch('that.counter', function () {
-  console.log(that.counter);
+  //console.log(that.counter);
      return that.counter;
  },function(value){
-      console.log(value)
+      //console.log(value)
  });
 
  window.onbeforeunload = function(event) {
-    console.log(that.users_algorithms[0].time_to_resubmit);
-    console.log(that.users_algorithms[0].time_spent);
+    // console.log(that.users_algorithms[0].time_to_resubmit);
+    // console.log(that.users_algorithms[0].time_spent);
     usersFactory.unloadPage(that.users_algorithms, that.user._id);
     event.returnValue = that.user.first_name;
 };

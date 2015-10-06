@@ -2,9 +2,14 @@ algorithm_app.factory('algorithmFactory', function($http) {
   factory = {};
   algorithms = [];
   single_algorithm = {};
+  
+  factory.set_single = function (data){
+    single_algorithm = data;
+  }
+  factory.show_single = function(callback){
+    callback(single_algorithm);
+  }
 
-
-  console.log(factory, "I am a factory");
   factory.index = function(callback){
       console.log("algorithm");
    $http.get('/algorithms').then(function(output) {

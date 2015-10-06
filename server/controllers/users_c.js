@@ -67,9 +67,13 @@ module.exports = (function() {
                 User.findOne({"email": req.body['email']}, 'first_name admin_level email updated_at _id',function (err, user_info){
                   console.log("d");
                   if (err) { console.log(err);}
-
+                  else {
+                    var myinfo = {"first_name":user_info.first_name, "admin_level":user_info.admin_level, "updated_at":Date.now(),
+                    "email":user_info.email, "_id":user_info._id}
+                    res.json(myinfo);
+                  }
                   // console.log(user_info, "found this here!");
-                    res.json(user_info);
+                  //  res.json(user_info);
                   })
               }
             })
@@ -94,7 +98,7 @@ module.exports = (function() {
     get_algorithms:function(req,res){
       var user = User.findOne({_id:req.params.user_id},"algorithm",function(err,algorithms){
         if (err){console.log(err);}
-        else {console.log(algorithms);
+        else {console.log(algorithms, "<M");
         res.json({users_algorithms:algorithms});
         }
       });
@@ -118,10 +122,11 @@ module.exports = (function() {
       });
     },
     update_algorithm: function(req,res){
-      console.log(req.body.algo_id, "here");
+      console.log(req.body.user_id, "here");
+
       var user = User.findOne({_id:req.params.user_id}, function(err, user){
         if (err){console.log(err);}
-        // else {console.log(user);
+         else {console.log(user, "here NOW");
           for (var i = 0; i < user.algorithm.length; i ++){
             //console.log(user.algorithm[i].algo_id);
             if (user.algorithm[i].algo_id == req.body.algo_id){
@@ -135,6 +140,7 @@ module.exports = (function() {
               //console.log(user);
             }
           }
+        }
         // user.algorithm.push(req.body);
         // user.save();
         //}

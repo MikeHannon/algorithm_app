@@ -5,9 +5,14 @@ algorithm_app.factory('usersFactory', function($http) {
   var user = {};
   factory.setUser = function(user_data){
     user = user_data;
-    this.users_algorithms(user.user_id,function(data){console.log(data);});
+    console.log(this);
+    //console.log(user);
+    this.users_algorithms(user._id,function(data){
+      users_algorithms = data;
+      console.log(data);
+    });
   //  this.index;
-    console.log(user, "I AM USER");
+  //  console.log(user, "I AM USER");
   }
 //  console.log(factory, "I am a factory");
   factory.index = function(callback){
@@ -26,6 +31,7 @@ algorithm_app.factory('usersFactory', function($http) {
 
   factory.initiate_algorithm = function(user_id,algo,callback){
     console.log("in factory");
+    var that = this;
 //adapt this to correlate with the updated model.
     var algorithm_info = {};
     algorithm_info['keystrokes']=0;
@@ -41,7 +47,7 @@ algorithm_app.factory('usersFactory', function($http) {
     algorithm_info['solution_efficiency'] = 0;
     console.log(algorithm_info, "algo_info!");
     $http.post('/users/'+user_id+'/'+algo._id, algorithm_info).then(function(output){
-      console.log(output), function(){console.log("ERROR");};
+      callback();
     });
   }// I AM HERE!
 
@@ -66,7 +72,7 @@ algorithm_app.factory('usersFactory', function($http) {
   //  console.log(users_algorithms);
   };
 
-  factory.update_algorithm = function(user_id, algorithm_id){
+  factory.update_algorithm = function(user_id, algorithm_id, callback){
     console.log(user_id);
     var algorithm_info = {};
     algorithm_info['keystrokes']=0;
@@ -82,12 +88,9 @@ algorithm_app.factory('usersFactory', function($http) {
     algorithm_info['solution_efficiency'] = 0;
     console.log(algorithm_info, "algo_info!");
     $http.patch('/users/'+user_id+'/'+algorithm_id._id, algorithm_info).then(function(output){
-      console.log(output), function(){console.log("ERROR");};
-    });
-
-
-
-
+      console.log(output);
+      callback();},
+      function(){console.log("ERROR");});
   }
 
   factory.login = function(info, callback){
@@ -122,9 +125,10 @@ algorithm_app.factory('usersFactory', function($http) {
   }
   // get all info
   factory.users_algorithms = function(user_id, callback){
+    console.log(user_id);
     if (user_id){
     $http.post("/users_algorithms/"+user_id).then(function(data){
-      //  console.log(data.data.users_algorithms.algorithm);
+        console.log(data.data.users_algorithms.algorithm);
         users_algorithms = data.data.users_algorithms.algorithm;
         callback(users_algorithms);
 

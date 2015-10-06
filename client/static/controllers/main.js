@@ -1,4 +1,4 @@
-algorithm_app.controller('mainController', function($scope,$routeParams, $location, $timeout, algorithmFactory, usersFactory) {
+algorithm_app.controller('mainController', function($scope, $routeParams, $location, $timeout, algorithmFactory, usersFactory) {
   var that = this;
   that.hints =0;
   that.type = 0;
@@ -13,7 +13,7 @@ algorithm_app.controller('mainController', function($scope,$routeParams, $locati
   this.evaluate = {};
 
   this.show_evaluations = function(assignment_test, user, timers3){
-    console.log(timers3);
+    console.log(algorithmFactory.show_single(function(data){console.log(data);}));
     that.type = 1;
 
     var data = that.evaluate.function.editor.getValue() + assignment_test.test_code;
@@ -34,6 +34,7 @@ algorithm_app.controller('mainController', function($scope,$routeParams, $locati
         clearTimeout(timers3[0]);
         timers3.pop();
       }
+      if (failure_counter == 0){}
     });
     //submit
     $timeout(function() {
@@ -75,7 +76,7 @@ algorithm_app.controller('mainController', function($scope,$routeParams, $locati
       size_consoles();
       var editor = set_handlers();
       that.evaluate = {function: editor};
-    });
+    }, 500);
   }
   this.show_hint = function(data, kind){
     that.hints ++;
