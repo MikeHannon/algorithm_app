@@ -23,14 +23,6 @@ algorithm_app.controller('usersController', function($scope,$routeParams, $locat
     return new Array(n);
   }
 
-
-//   console.log(last_login);
-// //  console.log(new Date(last_login).getMilliseconds());
-//   console.log((myDate - last_login));
-
-
-
-
   this.login = function(user_info){
     usersFactory.login(user_info, function(data){
     //  console.log(data);
@@ -87,6 +79,7 @@ algorithm_app.controller('usersController', function($scope,$routeParams, $locat
 
   this.initiate_algorithm = function(user_id, algo){
   //  console.log(algo,"from initiate");
+    usersFactory.unloadPage(that.users_algorithms, that.user._id);
     usersFactory.initiate_algorithm(user_id,algo,function(data){
     that.users_algorithms_index();
      console.log(user_id);
@@ -151,6 +144,7 @@ this.algorithm_reunlock = function(algorithm_info){
   if (that.user && that.user._id){
     that.check_login();
     //console.log(that.user._id);
+    usersFactory.unloadPage(that.users_algorithms, that.user._id);
     usersFactory.update_algorithm(that.user._id, algorithm_info,that.users_algorithms_index );
 
   }

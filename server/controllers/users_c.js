@@ -115,6 +115,7 @@ module.exports = (function() {
             User.findOneAndUpdate({_id:user._id}, {$set:{algorithm:user.algorithm}},function (err,data){
               if (err) {return "fail";}
               res.json(data);
+              console.log(" I UPDATED #2");
             });
 
           }
@@ -136,6 +137,7 @@ module.exports = (function() {
               User.findOneAndUpdate({_id:user._id}, {$set:{algorithm:user.algorithm}},function (err,data){
                 if (err) {return "fail";}
                 res.json(data);
+                  console.log(" I UPDATED #1");
               });
               //console.log(user);
             }

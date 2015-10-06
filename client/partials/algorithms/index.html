@@ -46,7 +46,7 @@
                     <div class="card-action center-align">
 
                       <a ng-if = "user.algorithm_unlocked(algo._id) == -1;" href="#/algorithms" ng-click = "algorithm.show_algorithm_html(algo); user.initiate_algorithm(user.user._id, algo)" class="waves-effect waves-light btn"><i class="mdi-action-lock-outline left"></i>Unlock</a>
-                      <a ng-if = "user.is_algorithm(algo._id).time_to_resubmit !== 0" class = "center-align">Study Up!</a>
+                      <a ng-if = "user.algorithm_unlocked(algo._id) != -1 && user.is_algorithm(algo._id).time_to_resubmit !== 0" class = "center-align">Study Up!</a>
                       <a ng-if = "user.algorithm_unlocked(algo._id) != -1 &&  user.algo_up_to_date(algo.updated_at, algo._id) && user.is_algorithm(algo._id).time_to_resubmit == 0" href="#/challenges/{{algo._id}}" ng-click = "algorithm.show_algorithm_html(algo, user.algorithm_unlocked(algo._id)); user.set_active_algorithm(algo._id)" class = "center-align">Attempt</a>
 
                       <a ng-if = "!user.algo_up_to_date(algo.updated_at, algo._id)" href="#/algorithms" ng-click = " user.algorithm_reunlock(algo)" class = "center-align">Updated, ReUnlock</a>

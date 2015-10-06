@@ -37,11 +37,13 @@ algorithm_app.factory('usersFactory', function($http) {
     algorithm_info['keystrokes']=0;
     algorithm_info['unlocked']=true;
     algorithm_info['score']=0;
+  //  algorithm_info['time_spent_reset'] = algo.time_allowed;
     algorithm_info['time_spent']=algo.time_allowed;
     algorithm_info['algo_id']=algo._id;
     algorithm_info['prev_solution'] ="";
     algorithm_info['current_solution'] ="";
     algorithm_info['working_solution'] = "";
+  //  algorithm_info['time_to_resubmit'] = algo.resubmit_after;
     algorithm_info['time_to_resubmit'] = algo.resubmit_after;
     algorithm_info['threestartime'] = 0;
     algorithm_info['solution_efficiency'] = 0;
