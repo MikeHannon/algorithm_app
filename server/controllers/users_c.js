@@ -98,7 +98,9 @@ module.exports = (function() {
     get_algorithms:function(req,res){
       var user = User.findOne({_id:req.params.user_id},"algorithm",function(err,algorithms){
         if (err){console.log(err);}
-        else {console.log(algorithms, "<M");
+    else
+      {
+        //console.log(algorithms, "<M");
         res.json({users_algorithms:algorithms});
         }
       });
@@ -106,16 +108,30 @@ module.exports = (function() {
     update_algorithm2:function(req,res){
 
       var user = User.findOne({_id:req.params.user_id}, function(err, user){
+
         if (err){console.log(err);}
         for (var i = 0; i < user.algorithm.length; i ++){
           //console.log(user.algorithm[i].algo_id);
           if (user.algorithm[i].algo_id == req.body.algo_id){
           //  console.log("I am here", req.body.score, user.algorithm[i].algo_id);
+          if (user.algorithm[i].score <= req.body.score){
             user.algorithm[i].score = req.body.score;
-            User.findOneAndUpdate({_id:user._id}, {$set:{algorithm:user.algorithm}},function (err,data){
+          }
+            user.algorithm[i].time_spent = req.body.time_spent;
+            user.algorithm[i].time_to_resubmit = req.body.time_to_resubmit;
+            console.log(user.algorithm[i].threestartime);
+            console.log(req.body.threestartime);
+            if (user.algorithm[i].score == 3){
+              console.log("###### I VE ARRIVED ####");
+              if (user.algorithm[i].threestartime <       req.body.threestartime){
+                console.log("###### I VE ARRIVED HERE ####");
+                user.algorithm[i].threestartime = req.body.threestartime;
+              }
+            }
+        //    user.save();
+            User.findOneAndUpdate({_id:user._id}, {$set:{algorithm:user.algorithm}}, {new: true}, function (err,data){
               if (err) {return "fail";}
               res.json(data);
-              console.log(" I UPDATED #2");
             });
 
           }
@@ -123,37 +139,51 @@ module.exports = (function() {
       });
     },
     update_algorithm: function(req,res){
-      console.log(req.body.user_id, "here");
 
       var user = User.findOne({_id:req.params.user_id}, function(err, user){
         if (err){console.log(err);}
          else {console.log(user, "here NOW");
+         for (var j = 0; j < user.algorithm.length; j ++){
+            // delete user.algorithm[j]["_id"];
+         }
           for (var i = 0; i < user.algorithm.length; i ++){
             //console.log(user.algorithm[i].algo_id);
+
             if (user.algorithm[i].algo_id == req.body.algo_id){
+              if (req.body.working_solution){
+                console.log(" ORIGINAL ");
               req.body.working_solution = user.algorithm[i].working_solution;
               req.body.score =  user.algorithm[i].score;
               user.algorithm[i] = req.body;
-              User.findOneAndUpdate({_id:user._id}, {$set:{algorithm:user.algorithm}},function (err,data){
-                if (err) {return "fail";}
-                res.json(data);
-                  console.log(" I UPDATED #1");
+              console.log(user.algorithm[i]);
+              }
+              if (req.body.time_to_resubmit){
+
+                console.log(" RESUBMIT ");
+                user.algorithm[i].time_to_resubmit = req.body.time_to_resubmit;
+                user.algorithm[i].time_spent = req.body.time_spent;
+                console.log(user.algorithm, "AFTER ADJUSTMENT!");
+              }
+              var myalgo = user.algorithm;
+              console.log(myalgo, "AFTER ADJUSTMENT! ------");
+              User.findOneAndUpdate({_id:user._id}, {$set:{algorithm: myalgo}},function (err,data){
+                if (err) {res.json({}); return "fail";}
+                else {res.json(data);
+                  console.log(" I UPDATED #1");}
               });
               //console.log(user);
             }
+            //else (res.json({}));
           }
+
         }
-        // user.algorithm.push(req.body);
-        // user.save();
-        //}
-      //console.log("I am here now");
       });
     },
     update_algorithm3:function(req,res){
-      console.log(req.body, "BODY");
+  //    console.log(req.body, "BODY");
       var algorithm = req.body;
-      console.log(algorithm);
-      console.log(req.params, "PARAMS");
+  //    console.log(algorithm);
+  //    console.log(req.params, "PARAMS");
       User.findOneAndUpdate({_id:req.params.id}, {$set:{algorithm:algorithm}},function (err,data){
         if (err) {return "fail";}
         res.json(data);

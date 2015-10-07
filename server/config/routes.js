@@ -16,7 +16,7 @@ module.exports = function(app) {
   });
 //new
   app.post('/users/:user_id/:algo_id',function(req,res){
-    console.log(req.body, "unlocking this!");
+  //  console.log(req.body, "unlocking this!");
     Users.create_algorithm(req,res);
     //res.json({"hello":"worldinput"});
   });
@@ -26,7 +26,7 @@ module.exports = function(app) {
     //res.json({"hello":"worldinput"});
   });
   app.patch('/users2/:user_id/:algo_id',function(req,res){
-    //console.log("hello");
+    console.log(req.body);
     Users.update_algorithm2(req,res);
   //  Users.update_algorithm(req,res);
     //res.json({"hello":"worldinput"});
@@ -34,7 +34,7 @@ module.exports = function(app) {
 
   app.post('/users_algorithms/:user_id', function(req,res){
     Users.get_algorithms(req,res);
-    console.log(req.params.user_id, "I AM PARAMS");
+  //  console.log(req.params.user_id, "I AM PARAMS");
   });
 
 
@@ -60,7 +60,7 @@ module.exports = function(app) {
   });
 
   app.post('/algorithms/:id',function(req,res){
-    console.log(req.params);
+  //  console.log(req.params);
     Algorithms.update(req,res);
   });
 
@@ -77,9 +77,10 @@ module.exports = function(app) {
   app.delete('/users/:id', function(req,res){
   res.json({"hello": req.params.id});
   });
+
   app.patch('/users_algos/:id', function(req,res){
     Users.update_algorithm3(req,res);
-    console.log("????");
-    console.log(req.params);
+    // console.log("????");
+    // console.log(req.params);
   });
 }

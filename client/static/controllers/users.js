@@ -20,6 +20,7 @@ algorithm_app.controller('usersController', function($scope,$routeParams, $locat
 
 
   this.number_of_times = function(n){
+    //console.log(n, "THIS IS A NUMBER");
     return new Array(n);
   }
 
@@ -82,6 +83,10 @@ algorithm_app.controller('usersController', function($scope,$routeParams, $locat
     usersFactory.unloadPage(that.users_algorithms, that.user._id);
     usersFactory.initiate_algorithm(user_id,algo,function(data){
     that.users_algorithms_index();
+    usersFactory.get_current_algorithms(function(data){
+      this.users_algorithms = data;
+      console.log(this.users_algorithms);
+    });
      console.log(user_id);
 
 
@@ -124,6 +129,8 @@ this.algorithm_unlocked = function(algorithm_id){
   return -1;
 }
 
+
+
 this.algo_up_to_date = function(algorithm_updated, algo_id){
   //console.log(algorithm_updated);
 
@@ -151,13 +158,13 @@ this.algorithm_reunlock = function(algorithm_info){
 
 }
 
+
 this.is_algorithm = function(algorithm_id){
+//  console.log(that.users_algorithms);
   if (that.users_algorithms){
     for (var i = 0; i < that.users_algorithms.length; i ++){
-      //  console.log(that.users_algorithms[i]);
       if (that.users_algorithms[i].algo_id == algorithm_id){
-
-          // console.log("old!");
+      //  console.log(that.users_algorithms[i].score);
         return that.users_algorithms[i];
       }
     }
@@ -165,7 +172,21 @@ this.is_algorithm = function(algorithm_id){
   return null;
 }
 
-
+this.get_algorithms = function(){
+  console.log("ADJUSTED ALGORITHM, user side!");
+  usersFactory.get_current_algorithms(function(data){
+    console.log(data);
+    that.users_algorithms = data;
+    for (var i = 0; i < that.users_algorithms.length; i ++){
+      if (that.active_algorithm.algo_id == that.users_algorithms[i].algo_id){
+        console.log("I AM HERE #################");
+        that.active_algorithm = that.users_algorithms[i];
+      }
+    }
+    console.log(that.active_algorithm);
+    console.log(that.users_algorithms);
+  });
+}
 
 function set_users(data){
   $cookies.put('first_name', data.first_name);
@@ -201,11 +222,9 @@ this.algorithm_timer = function(){
 this.reset_these_timers= function(){
 
   if (that.IndexTimers){
-
     for (var i = that.IndexTimers.length-1; i >= 0; i --){
       $('#submit_answer').click();
       clearInterval(that.IndexTimers[i]);
-
     }
   }
 }
@@ -218,17 +237,11 @@ this.begin_timers =function(){
   for (var i = 0; i < that.users_algorithms.length; i ++){
 
       if (that.users_algorithms[i].time_to_resubmit > 0){
-
-        //console.log((that.users_algorithms[i].time_to_resubmit));
         that.users_algorithms[i].time_to_resubmit -= 1000;
-
-        // console.log(that.users_algorithms[i].restart_time);
-        // console.log(that.counter);
         that.counter -=1;
         $scope.$apply();
       }
       else {
-
         (clearInterval(this));}
     }
   },1000))}

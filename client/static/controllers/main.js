@@ -12,7 +12,7 @@ algorithm_app.controller('mainController', function($scope, $routeParams, $locat
 
   this.evaluate = {};
 
-  this.show_evaluations = function(assignment_test, user, timers3){
+  this.show_evaluations = function(assignment_test, user, timers3, callback, time_taken){
     console.log(algorithmFactory.show_single(function(data){console.log(data);}));
     that.type = 1;
 
@@ -27,14 +27,31 @@ algorithm_app.controller('mainController', function($scope, $routeParams, $locat
         }
       }
       if (failure_counter == 0){
-        //console.log("success");
+        console.log(callback);
 
-        usersFactory.scoreAlgorithm(that.hints, assignment_test);
-        that.hints =0;
+        console.log(assignment_test);
+        //resubmit_after, time_allowed
+        var myData = {};
+        myData.hints = that.hints;
+        myData.time_to_resubmit = assignment_test.resubmit_after;
+        myData.time_spent = assignment_test.time_allowed;
+        myData.threestartime =time_taken.time_spent;
+        console.log(time_taken, "INNNNNNNFOOOOOO");
+        usersFactory.scoreAlgorithm(myData, assignment_test, callback);
+        that.hints = 0;
+        console.log(myData);
+
         clearTimeout(timers3[0]);
         timers3.pop();
       }
-      if (failure_counter == 0){}
+      if (failure_counter == 0){
+        $timeout(function() {
+            console.log(assignment_test);
+      // usersFactory.reset_
+          $('#algo_index_main').click();
+          //that.type = 0;
+        },3000)
+      }
     });
     //submit
     $timeout(function() {
@@ -53,6 +70,7 @@ algorithm_app.controller('mainController', function($scope, $routeParams, $locat
     }
     $timeout(function() {
     //  $('#eval_tab').click();
+
       $('#console_tab').click();
       that.type = 0;
     }, 100)

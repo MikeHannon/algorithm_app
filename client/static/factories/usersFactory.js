@@ -14,6 +14,9 @@ algorithm_app.factory('usersFactory', function($http) {
   //  this.index;
   //  console.log(user, "I AM USER");
   }
+  factory.get_current_algorithms = function(callback){
+    callback(users_algorithms);
+  }
 //  console.log(factory, "I am a factory");
   factory.index = function(callback){
    $http.get('/users').success(function(output) {
@@ -53,18 +56,34 @@ algorithm_app.factory('usersFactory', function($http) {
     });
   }// I AM HERE!
 
-  factory.scoreAlgorithm = function(hints, algorithm){
-    console.log(hints, algorithm);
+  factory.scoreAlgorithm = function(hints, algorithm, callback){
+
+    console.log(hints, algorithm, "--------------");
+      //console.log(callback);
     for (var i = 0; i < users_algorithms.length; i ++){
       console.log(users_algorithms[i].algo_id);
       if (users_algorithms[i].algo_id == algorithm._id){
-        console.log(user, "I AM A USER");
-        if (hints == 0){users_algorithms[i].score = 3;}
-        else if (hints == 1){users_algorithms[i].score = 2;}
-        else if (hints == 2){users_algorithms[i].score = 1;}
+    //    console.log(user, "I AM A USER");
+        if (hints.hints == 0){users_algorithms[i].score = 3;}
+        else if (hints.hints == 1){users_algorithms[i].score = 2;}
+        else if (hints.hints == 2){users_algorithms[i].score = 1;}
         else {users_algorithms[i].score = 0;}
+        console.log(users_algorithms[i], "--------");
 
+        users_algorithms[i].time_spent = hints.time_spent;
+      //  console.log(users_algorithms[i].time_spent);
+        users_algorithms[i].time_to_resubmit = hints.time_to_resubmit
+      //  console.log(users_algorithms[i].time_to_resubmit);
+
+        console.log(users_algorithms[i], "2--------");
         $http.patch('/users2/'+user._id+'/'+users_algorithms[i]._id, users_algorithms[i]).then(function(output){
+        //  console.log(users_algorithms);
+
+          users_algorithms = output.data.algorithm;
+          console.log("#####################");
+          console.log(users_algorithms);
+          console.log("#####################");
+          callback();
           console.log(output), function(){console.log("ERROR");};
         });
         break;
@@ -123,7 +142,23 @@ algorithm_app.factory('usersFactory', function($http) {
       }
     }
     else {console.log("no data");}
+  }
+  factory.reset_timers = function(user, algorithm, callback){
+    console.log(user._id);
+    var algorithm_info = {};
 
+    algorithm_info['time_spent']=algorithm.time_allowed;
+    algorithm_info['time_to_resubmit'] = algorithm.resubmit_after;
+    algorithm_info['algo_id'] = algorithm._id;
+
+    console.log(algorithm_info, "algo_info!");
+    $http.patch('/users/'+user._id+'/'+ algorithm._id, algorithm_info).then(function(output){
+      users_algorithms = output.data.algorithm;
+      console.log(output.data.algorithm, "GRRRRRRR");
+      callback();},
+      function(){console.log("ERROR");});
+      //console.log(user._id);
+  //  callback();
   }
   // get all info
   factory.users_algorithms = function(user_id, callback){
@@ -140,7 +175,11 @@ algorithm_app.factory('usersFactory', function($http) {
   }
   factory.unloadPage = function(algo, user_id){
     console.log(algo);
-    console.log(user_id);
+    for (var i = 0; i < algo.length; i ++){
+      if(algo[i].algo_id == users_algorithms[i].algo_id);
+      algo[i].score = users_algorithms[i].score;
+    }
+    console.log(algo);
     $http.patch("/users_algos/"+user_id, algo).then(function(data){}), function(){};
   };
 
