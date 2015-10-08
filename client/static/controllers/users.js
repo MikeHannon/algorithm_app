@@ -205,6 +205,12 @@ this.algorithm_timer = function(){
     var t =  setInterval(function(){
           if (that.active_algorithm.time_spent > 0){
             that.active_algorithm.time_spent -= 1000;
+            for (var i = 0; i < that.users_algorithms.length; i ++){
+              if (that.users_algorithms[i].algo_id == that.active_algorithm.algo_id){
+                that.users_algorithms[i].time_spent = that.active_algorithm.time_spent;
+                usersFactory.update_current_algorithms(that.users_algorithms);
+              }
+            }
             $scope.$apply();
           }
           else {
@@ -238,6 +244,7 @@ this.begin_timers =function(){
 
       if (that.users_algorithms[i].time_to_resubmit > 0){
         that.users_algorithms[i].time_to_resubmit -= 1000;
+        usersFactory.update_current_algorithms(that.users_algorithms);
         that.counter -=1;
         $scope.$apply();
       }

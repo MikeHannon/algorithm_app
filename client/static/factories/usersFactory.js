@@ -3,6 +3,9 @@ algorithm_app.factory('usersFactory', function($http) {
   var users = [];
   var users_algorithms = [];
   var user = {};
+  factory.update_current_algorithms = function (data){
+    users_algorithms = data;
+  }
   factory.setUser = function(user_data){
     user = user_data;
     console.log(this);
