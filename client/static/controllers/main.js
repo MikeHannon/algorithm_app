@@ -14,10 +14,13 @@ algorithm_app.controller('mainController', function($scope, $routeParams, $locat
 
   this.show_evaluations = function(assignment_test, user, timers3, callback, time_taken){
     console.log(algorithmFactory.show_single(function(data){console.log(data);}));
+
     that.type = 1;
 
     var data = that.evaluate.function.editor.getValue() + assignment_test.test_code;
     //catches failures!
+    console.log(data);
+
     evaluate_and_console_log2(data, function(data){
       var failed = "failure";
       var failure_counter = 0;
@@ -33,7 +36,7 @@ algorithm_app.controller('mainController', function($scope, $routeParams, $locat
         //resubmit_after, time_allowed
         var myData = {};
         myData.hints = that.hints;
-        myData.time_to_resubmit = assignment_test.resubmit_after;
+        myData.time_to_resubmit = 10000;
         myData.time_spent = assignment_test.time_allowed;
         myData.threestartime =time_taken.time_spent;
         console.log(time_taken, "INNNNNNNFOOOOOO");
@@ -43,14 +46,39 @@ algorithm_app.controller('mainController', function($scope, $routeParams, $locat
 
         clearTimeout(timers3[0]);
         timers3.pop();
+
+        $timeout(function() {
+            console.log(assignment_test);
+      // usersFactory.reset_
+          $('#algo_index_main').click();
+          //that.type = 0;
+        },3000);
       }
-      if (failure_counter == 0){
+      else if (time_taken == 0){
+        console.log(callback);
+
+        console.log(assignment_test);
+        //resubmit_after, time_allowed
+        var myData = {};
+        myData.hints = 3;
+        myData.time_to_resubmit = assignment_test.resubmit_after;
+        myData.time_spent = assignment_test.time_allowed;
+        myData.threestartime =time_taken.time_spent;
+        //console.log(time_taken, "INNNNNNNFOOOOOO");
+        usersFactory.scoreAlgorithm(myData, assignment_test, callback);
+        that.hints = 0;
+        console.log(myData);
+
+        clearTimeout(timers3[0]);
+        timers3.pop();
+
         $timeout(function() {
             console.log(assignment_test);
       // usersFactory.reset_
           $('#algo_index_main').click();
           //that.type = 0;
         },3000)
+
       }
     });
     //submit

@@ -2,7 +2,9 @@
 <link rel="stylesheet" href="static/materialize/css/materialize.min.css">
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script> -->
 <link rel="stylesheet" href="static/css/main.css">
-
+<div class ="row">
+  <h3>SCORE: <span ng-bind = "user.total_stars()"></span>/<span ng-bind = "user.possible_stars();"></span> </h3>
+</div>
 <p>Most of these algorithms will take you anywhere from 20 minutes to 1 hour to complete.  The challenge algorithms might take you longer.  Practice one algorithm every day and we strongly encourage you to work with other people.</p>
 <div class="row">
   <div class="col s12">
@@ -44,10 +46,10 @@
                     <div class="card-action center-align">
 
                       <a ng-if = "user.algorithm_unlocked(algo._id) == -1;" href="#/algorithms" ng-click = "algorithm.show_algorithm_html(algo); user.initiate_algorithm(user.user._id, algo)" class="waves-effect waves-light btn"><i class="mdi-action-lock-outline left"></i>Unlock</a>
-                      <a ng-if = "user.algorithm_unlocked(algo._id) != -1 && user.is_algorithm(algo._id).time_to_resubmit !== 0" class = "center-align">Study Up!</a>
-                      <a ng-if = "user.algorithm_unlocked(algo._id) != -1 &&  user.algo_up_to_date(algo.updated_at, algo._id) && user.is_algorithm(algo._id).time_to_resubmit == 0" href="#/challenges/{{algo._id}}" ng-click = "algorithm.show_algorithm_html(algo, user.algorithm_unlocked(algo._id)); user.set_active_algorithm(algo._id)" class = "center-align">Attempt</a>
+                      <a ng-if = "user.algorithm_unlocked(algo._id) != -1 && user.is_algorithm(algo._id).time_to_resubmit !== 0 && user.algo_up_to_date(algo.updated_at, algo._id)" class = "center-align">Study Up!</a>
+                      <a ng-if = "user.algorithm_unlocked(algo._id) != -1 &&  user.algo_up_to_date(algo.updated_at, algo._id) && user.is_algorithm(algo._id).time_to_resubmit == 0 && user.algo_up_to_date(algo.updated_at, algo._id)" href="#/challenges/{{algo._id}}" ng-click = "algorithm.show_algorithm_html(algo, user.algorithm_unlocked(algo._id)); user.set_active_algorithm(algo._id)" class = "center-align">Attempt</a>
 
-                      <a ng-if = "!user.algo_up_to_date(algo.updated_at, algo._id)" href="#/algorithms" ng-click = " user.algorithm_reunlock(algo)" class = "center-align">Updated, ReUnlock</a>
+                      <a ng-if = "!user.algo_up_to_date(algo.created_at, algo._id)" ng-click = "user.algorithm_reunlock(algo)" class = "center-align">Updated, ReUnlock</a>
                     </div>
                   </div>
                 </div>

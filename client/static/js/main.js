@@ -108,7 +108,7 @@ function size_consoles(){
 }
 
 function evaluate_and_console_log2(data, callback){
-
+  console.log(data, "HEEEERRE");
   //var data = solution.editor.getValue() + " " + test_code.editor.getValue();
   var myyield = eval(data);
   callback(myyield)

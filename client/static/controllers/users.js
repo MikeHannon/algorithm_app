@@ -92,6 +92,24 @@ algorithm_app.controller('usersController', function($scope,$routeParams, $locat
 
     });
   }
+  this.total_stars = function(){
+    var stars = 0;
+    for (var i = 0; i < that.users_algorithms.length; i ++){
+      stars += that.users_algorithms[i].score;
+    }
+    return stars;
+  }
+
+  this.possible_stars = function(){
+    var possible_stars = 0;
+    for (var i = 0; i < that.users_algorithms.length; i ++){
+      if (that.users_algorithms[i].unlocked){
+      possible_stars += 3;
+      }
+    }
+    return possible_stars;
+  }
+
 
   this.users_algorithms_index = function(){
     usersFactory.users_algorithms(that.user._id,function(data){
@@ -132,13 +150,13 @@ this.algorithm_unlocked = function(algorithm_id){
 
 
 this.algo_up_to_date = function(algorithm_updated, algo_id){
+  //console.log("UP TO DATE??");
   //console.log(algorithm_updated);
-
   if (that.users_algorithms){
     for (var i = 0; i < that.users_algorithms.length; i ++){
       if (that.users_algorithms[i].algo_id == algo_id){
-        if (that.users_algorithms[i].created_at < algorithm_updated){
-          return false;
+        if (that.users_algorithms[i].created_at > algorithm_updated){
+
         }
       }
     }
@@ -147,12 +165,13 @@ this.algo_up_to_date = function(algorithm_updated, algo_id){
 }
 this.algorithm_reunlock = function(algorithm_info){
   // console.log(algorithm_info, "ALGO ID");
-  // console.log(that.user._id, "USERSSSS");
+  console.log(that.user._id, "USERSSSS");
+
   if (that.user && that.user._id){
     that.check_login();
     //console.log(that.user._id);
     usersFactory.unloadPage(that.users_algorithms, that.user._id);
-    usersFactory.update_algorithm(that.user._id, algorithm_info,that.users_algorithms_index );
+    usersFactory.update_algorithm(that.user._id, algorithm_info,that.users_algorithms_index);
 
   }
 
