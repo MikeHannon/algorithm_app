@@ -13,9 +13,11 @@ var algorithms = new mongoose.Schema({
   threestartime:'number',
   time_to_resubmit:'number',
   date_started:{type:Date,default:Date.now}, // for our timers...
-  solution_efficiency:'number', // score! 
+  solution_efficiency:'number', // score!
+  algorithm_type:'string',
   keyStrokes:"number",
-  restart_time:'Date'
+  restart_time:'Date',
+  difficulty:"number"
 });
 
 var schema = new mongoose.Schema(

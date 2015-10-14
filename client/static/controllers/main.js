@@ -3,6 +3,7 @@ algorithm_app.controller('mainController', function($scope, $routeParams, $locat
   that.hints =0;
   that.type = 0;
   this.test_function = function(timers3){
+    that.hints = 0;
     if (timers3.length > 0){
       clearInterval(timers3[0]);
     }

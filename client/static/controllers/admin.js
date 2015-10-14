@@ -24,9 +24,6 @@ algorithm_app.controller('adminController', function($scope,$routeParams, $locat
   that.degradation_rate = 36000000000; // 1000 hrs
   that.time_allowed = 36000000; //1 hr
   that.type_of = "Choose one: Array, Linked_List, Data Structure, Library, String, Other";
-
-
-
   that.sortType     = 'first_name'; // set the default sort type
   that.sortReverse  = false; //default order
 
@@ -51,6 +48,7 @@ algorithm_app.controller('adminController', function($scope,$routeParams, $locat
     that.data_new_bool = false;
   };
   that.users_index = function(){
+    console.log("users index");
     that.algorithm_index_bool = false;
     that.algorithm_new_bool = false;
     that.users_index_bool = true;

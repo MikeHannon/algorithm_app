@@ -102,13 +102,16 @@ function set_handlers(){
 }
 
 function size_consoles(){
+  var show_timers = $('#show_timers').height();
   var assignment = $('#assignments').height();
-  $('#editor, #chat, #eval, #hints, #consoles, #pseudocodes').css({"top": 140+assignment+"px"});
-  console.log(assignment)
+  $('#editor, #chat, #eval, #hints, #consoles, #pseudocodes').css({"top": 115+show_timers+assignment+"px"});
+
+  $('#algorithm_sliders').css({"top":70+show_timers+assignment+"px"});
+  //console.log(assignment)
 }
 
 function evaluate_and_console_log2(data, callback){
-  console.log(data, "HEEEERRE");
+  //console.log(data, "HEEEERRE");
   //var data = solution.editor.getValue() + " " + test_code.editor.getValue();
   var myyield = eval(data);
   callback(myyield)

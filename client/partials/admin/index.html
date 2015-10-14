@@ -26,6 +26,7 @@
   </div>
 </div>
 
+
 <div class = 'row' ng-if = "admin.algorithm_index_bool" ng-repeat = "specific_algorithm in algorithm.algorithms">
   <div class = " col m2">
     <p ng-bind = "specific_algorithm.title"></p>
@@ -37,72 +38,64 @@
   <div class = "col m2">
     <p><a class = "" href = "#/algorithms/delete/{{specific_algorithm._id}}" ng-click = "algorithm.edit_algorithm()">Delete</a></p>
   </div>
-
-
 </div>
 
 <div class = 'row' ng-if = "admin.algorithm_new_bool">
   <script src = "static/materialize/js/materialize.min.js"> </script>
   <script src = "static/js/new_algorithm.js"></script>
-
   <div class="row">
-  <div class="col s12">
-
-    <ul class="tabs">
-      <li class="tab col s3"><a href="#general">General</a></li>
-      <li class="tab col s3"><a href="#algo_hints">Hints/Info</a></li>
-      <li class="tab col s3"><a href="#supplements">Supplemental Info</a></li>
-      <li class="tab col s3"><a href="#algorithm_meat">Algorithm</a></li>
-
-    </ul>
-
-
-  </div>
+    <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s3"><a href="#general">General</a></li>
+        <li class="tab col s3"><a href="#algo_hints">Hints/Info</a></li>
+        <li class="tab col s3"><a href="#supplements">Supplemental Info</a></li>
+        <li class="tab col s3"><a href="#algorithm_meat">Algorithm</a></li>
+      </ul>
+    </div>
   <div id="general" class="col s12">
       <div class="row">
-      <form class="col s12">
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="algo_title" type="text" ng-model = "admin.algorithm.title" name = "title">
-            <label for="algo_title">Title</label>
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="algo_title" type="text" ng-model = "admin.algorithm.title" name = "title">
+              <label for="algo_title">Title</label>
+            </div>
+            <div class="input-field col s12">
+              <textarea id="algo_goal" type="text" ng-model = "admin.algorithm.goal" name = "goal"></textarea>
+              <label for="algo_goal">Goal</label>
+            </div>
           </div>
-          <div class="input-field col s12">
-            <textarea id="algo_goal" type="text" ng-model = "admin.algorithm.goal" name = "goal"></textarea>
-            <label for="algo_goal">Goal</label>
+          <div class="row">
+            <div class="input-field col s12">
+              <input placeholder="Placeholder" id="algo_oneStar" type="text" ng-model = "admin.algorithm.Onestar" ng-value ="admin.oneStar" name = "Onestar">
+              <label for="algo_oneStar">One Star criteria(add a space to confirm default)</label>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input placeholder="Placeholder" id="algo_oneStar" type="text" ng-model = "admin.algorithm.Onestar" ng-value ="admin.oneStar" name = "Onestar">
-            <label for="algo_oneStar">One Star criteria(add a space to confirm default)</label>
+          <div class="row">
+            <div class="input-field col s12">
+              <input placeholder="Placeholder" id="algo_twoStar" ng-model = "admin.algorithm.Twostars" ng-value ="admin.twoStars" type="text" name = "Twostars" >
+              <label for="algo_twoStar">Two star criteria (add a space to confirm default)</label>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input placeholder="Placeholder" id="algo_twoStar" ng-model = "admin.algorithm.Twostars" ng-value ="admin.twoStars" type="text" name = "Twostars" >
-            <label for="algo_twoStar">Two star criteria (add a space to confirm default)</label>
+          <div class="row">
+            <div class="input-field col s12">
+              <input placeholder="Placeholder" id="algo_threeStar" ng-model = "admin.algorithm.Threestars" type="text" name = "Threestars" ng-value ="admin.threeStars" >
+              <label for="algo_threeStar">Three star criteria (add a space to confirm default)</label>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input placeholder="Placeholder" id="algo_threeStar" ng-model = "admin.algorithm.Threestars" type="text" name = "Threestars" ng-value ="admin.threeStars" >
-            <label for="algo_threeStar">Three star criteria (add a space to confirm default)</label>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="algo_bonus" type="text" name = "Bonus" ng-model = "admin.algorithm.Bonus">
+              <label for="algo_bonus">Bonus criteria (for badges)</label>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="algo_bonus" type="text" name = "Bonus" ng-model = "admin.algorithm.Bonus">
-            <label for="algo_bonus">Bonus criteria (for badges)</label>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="algo_evaluation" ng-model = "admin.algorithm.Evaluation" type="text" name = "Evaluation">
+              <label for="algo_evaluation">What is going to be evaluated</label>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input id="algo_evaluation" ng-model = "admin.algorithm.Evaluation" type="text" name = "Evaluation">
-            <label for="algo_evaluation">What is going to be evaluated</label>
-          </div>
-        </div>
-
-      </form>
+        </form>
     </div>
   </div>
   <div id="algo_hints" class="col s12">
@@ -226,9 +219,12 @@
     <button ng-click = "admin.create_algorithm();">Save your algorithm</button>
   </div>
 
+  </div>
 </div>
 
+
 <div class = 'row' ng-if = "admin.users_index_bool" >
+
   <div class = "col m3 offset-m1"  >
     <input placeholder = "Search" id = "user_search" ng-model = "admin.users_search" type = "text">
     <label for = "user_search">Search</label>
@@ -242,15 +238,16 @@
           <p> <u>Int</u> |  <u>Adv</u> |  <u>Challenge</u> </p></td>
       <td>Email</td>
     </tr>
-    <tr ng-repeat = "user in user.users | orderBy:admin.sortType:admin.sortReverse | filter:admin.users_search">
-      <td><span ng-bind = "user.last_name"></span>, <span  ng-bind = "user.first_name"></td>
-      <td ng-bind = "user.admin_level"></td>
+    <tr ng-repeat = "user_info in user.users | orderBy:admin.sortType:admin.sortReverse | filter:admin.users_search">
+      <td><span ng-bind = "user_info.last_name"></span>, <span  ng-bind = "user_info.first_name"></td>
+      <td ng-bind = "user_info.admin_level"></td>
       <td>Class of </td>
-      <td> 0/35 | 0/35 | 0/30</td>
-      <td ng-bind = "user.email"></td>
+      <td> <span ng-bind = "user.inter_stars (user_info._id,0).stars"></span>/<span ng-bind = "user.inter_stars(user_info._id,0).unlocked"></span>  | <span ng-bind = "user.inter_stars (user_info._id,1).stars"></span>/<span ng-bind = "user.inter_stars(user_info._id,1).unlocked"></span> | <span ng-bind = "user.inter_stars (user_info._id,2).stars"></span>/<span ng-bind = "user.inter_stars(user_info._id,2).unlocked"></span> </td>
+      <td ng-bind = "user_info.email"></td>
       <td><a href = "">Update</a></td>
       <td><a href = "">Delete</a></td>
       <td><a href = "">Info</a></td>
+      <td></td>
     </tr>
 
   </table>
@@ -260,10 +257,10 @@
     <p> I am an new user</p>
   </div>
 
-  <div class = 'row' ng-if = "admin.data_index_bool" ng-repeat = "algorithm in algorithm.algorithms">
+  <div class = 'row' ng-if = "admin.data_index_bool">
     <p> I am data </p>
   </div>
 
-  <div class = 'row' ng-if = "admin.data_new_bool" ng-repeat = "algorithm in algorithm.algorithms">
+  <div class = 'row' ng-if = "admin.data_new_bool">
     <p> I am new data</p>
   </div>

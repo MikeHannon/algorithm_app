@@ -1,3 +1,4 @@
+//unlock is buggy
 algorithm_app.controller('usersController', function($scope,$routeParams, $location,$interval, $timeout, $cookies, usersFactory, algorithmFactory) {
   var that = this;
   this.user = {};
@@ -18,6 +19,23 @@ algorithm_app.controller('usersController', function($scope,$routeParams, $locat
   this.IndexTimers = [];
   this.ShowTimers = [];
 
+  this.inter_stars =function(user_id, level){
+    for (var i = 0; i < that.users.length; i ++){
+      // return users[i]._id;
+      if (user_id == that.users[i]._id){
+        var unlocked = 0;
+        var stars = 0;
+        for (var j = 0; j < that.users[i].algorithm.length ; j ++){
+          if (that.users[i].algorithm[j].difficulty == level){
+            stars += that.users[i].algorithm[j].score;
+            if (that.users[i].algorithm[j].unlocked){   unlocked ++;
+            }
+          }
+        }
+        return {"stars":stars, "unlocked":3*unlocked};
+      }
+    }
+  }
 
   this.number_of_times = function(n){
     //console.log(n, "THIS IS A NUMBER");
@@ -41,6 +59,7 @@ algorithm_app.controller('usersController', function($scope,$routeParams, $locat
   };
 
   this.index = function(){
+    console.log("hello");
     usersFactory.index(function(data){
       that.users = data;
     });

@@ -1,3 +1,4 @@
+
 #editor, #pseudocodes, #eval  {
      position: absolute;
      top: 140px;
@@ -38,6 +39,15 @@
    border-radius: 6px;
 
  }
+ ::-webkit-scrollbar {
+     -webkit-appearance: none;
+     width: 7px;
+ }
+ ::-webkit-scrollbar-thumb {
+     border-radius: 4px;
+     background-color: rgba(0,0,0,.5);
+     -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+ }
 
  #modes{
    position: absolute;
@@ -45,3 +55,24 @@
    bottom: -20px;
    border-radius: 6px;
  }
+#assignments{
+  overflow: -moz-scrollbars-vertical;
+  height: 100px;
+  overflow-y: scroll;
+}
+#show_timers{
+
+  height:5%;
+  background-color:lightgrey;
+  margin-top:0px;
+  border-top:0px;
+}
+.row{
+  margin-bottom:0px;
+}
+.column{
+  margin: 0px;
+}
+p{
+  margin: 1px;
+}

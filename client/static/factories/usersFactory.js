@@ -49,6 +49,8 @@ algorithm_app.factory('usersFactory', function($http) {
     algorithm_info['prev_solution'] ="";
     algorithm_info['current_solution'] ="";
     algorithm_info['working_solution'] = "";
+    algorithm_info['difficulty']=algo.difficulty;
+    algorithm_info['algorithm_type']=algo.type;
   //  algorithm_info['time_to_resubmit'] = algo.resubmit_after;
     algorithm_info['time_to_resubmit'] = 0;
     algorithm_info['threestartime'] = 0;
@@ -104,6 +106,8 @@ algorithm_app.factory('usersFactory', function($http) {
     algorithm_info['score']=0;
     algorithm_info['time_spent']=algorithm_id.time_allowed;
     algorithm_info['algo_id']=algorithm_id._id;
+    algorithm_info['difficulty']=algorithm_id.difficulty;
+    algorithm_info['algorithm_type']=algorithm_id.type;
   //  algorithm_info['prev_solution'] ="";
     algorithm_info['current_solution'] ="";
     algorithm_info['working_solution'] = "";

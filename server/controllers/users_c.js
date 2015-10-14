@@ -45,8 +45,6 @@ module.exports = (function() {
       req.body['created_at'] = Date.now();
       req.body['updated_at'] = Date.now();
       user = new User(req.body);
-
-
       User.findOne({"email": req.body['email']}, 'first_name admin_level email',function (err, user_info){
         if (err) { console.log(err);}
         else {
@@ -152,6 +150,7 @@ module.exports = (function() {
             if (user.algorithm[i].algo_id == req.body.algo_id){
               if (req.body.working_solution){
                 console.log(" ORIGINAL ");
+
               req.body.working_solution = user.algorithm[i].working_solution;
               req.body.score =  user.algorithm[i].score;
               user.algorithm[i] = req.body;
