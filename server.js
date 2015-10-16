@@ -11,7 +11,8 @@ var server = require('http').Server(app);
 // app.listen(8000, function() {
 //  console.log("listening on port 8000");
 // })
-
+//app.set("views")
+//app.set("static")
 server.listen(8000, function() {
   console.log("listening, port 3000");
 });
