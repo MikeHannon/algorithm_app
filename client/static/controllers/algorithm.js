@@ -22,6 +22,11 @@ algorithm_app.controller('algorithmController', function($scope,$routeParams, $l
     console.log(that.show_algorithm);
   }
 
+  this.delete_algorithm = function(algo_id){
+    algorithmFactory.delete_algorithm(algo_id, function(){that.index();});
+    //console.log("hello");
+  }
+
   this.edit_algorithm = function(algo){
     console.log(algo);
       that.show_algorithm = algo;

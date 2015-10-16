@@ -37,7 +37,9 @@ module.exports = function(app) {
   //  console.log(req.params.user_id, "I AM PARAMS");
   });
 
-
+  app.delete('/algorithm/:id', function(req,res){
+    Algorithms.delete(req,res);
+  });
 
   app.get('/users/new', function(req,res){
     res.json({"hello":"world"});

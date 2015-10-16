@@ -2,12 +2,20 @@ algorithm_app.factory('algorithmFactory', function($http) {
   factory = {};
   algorithms = [];
   single_algorithm = {};
-  
+
   factory.set_single = function (data){
     single_algorithm = data;
   }
   factory.show_single = function(callback){
     callback(single_algorithm);
+  }
+
+  factory.delete_algorithm = function(data,callback){
+    $http.delete('/algorithm/'+data).then(function(){
+      callback();
+    }).catch(function(response){
+      console.log(response);
+    });
   }
 
   factory.index = function(callback){

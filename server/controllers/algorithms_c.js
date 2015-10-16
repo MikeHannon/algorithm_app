@@ -4,6 +4,12 @@ var Algorithm = mongoose.model('Algorithm');
 
 module.exports = (function() {
   return {
+    delete: function(req,res){
+      Algorithm.remove({_id:req.params.id}, function(err, response){
+        res.json({"done":"done"});
+      });
+    },
+
     index: function (req,res){
       Algorithm.find({}, function(err, algorithms) {
         if (err){

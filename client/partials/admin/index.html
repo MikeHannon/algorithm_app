@@ -32,11 +32,11 @@
     <p ng-bind = "specific_algorithm.title"></p>
   </div>
   <div class = "col m2 offset-m6">
-    <p><a class = "" href = "#/algorithms/{{specific_algorithm._id}}/edit"  ng-click = "algorithm.edit_algorithm(specific_algorithm)">Edit</a></p>
+    <p><a class = "" ng-href = "#/algorithms/{{specific_algorithm._id}}/edit"  ng-click = "algorithm.edit_algorithm(specific_algorithm)">Edit</a></p>
   </div>
 
   <div class = "col m2">
-    <p><a class = "" href = "#/algorithms/delete/{{specific_algorithm._id}}" ng-click = "algorithm.edit_algorithm()">Delete</a></p>
+    <p><a class = "" ng-click = "algorithm.delete_algorithm(specific_algorithm._id)" ng-confirm-click = "Are you sure you want to permanently remove this algorithm?">Delete</a></p>
   </div>
 </div>
 
