@@ -14,13 +14,13 @@ algorithm_app.controller('mainController', function($scope, $routeParams, $locat
   this.evaluate = {};
 
   this.show_evaluations = function(assignment_test, user, timers3, callback, time_taken){
-    console.log(algorithmFactory.show_single(function(data){console.log(data);}));
+  //  console.log(algorithmFactory.show_single(function(data){console.log(data);}));
 
     that.type = 1;
 
     var data = that.evaluate.function.editor.getValue() + assignment_test.test_code;
     //catches failures!
-    console.log(data);
+  //  console.log(data);
 
     evaluate_and_console_log2(data, function(data){
       var failed = "failure";
@@ -30,6 +30,8 @@ algorithm_app.controller('mainController', function($scope, $routeParams, $locat
           failure_counter ++;
         }
       }
+      console.log(failure_counter, "FAILURES");
+      console.log(time_taken.time_spent, "TIME");
       if (failure_counter == 0){
         console.log(callback);
 
@@ -55,9 +57,9 @@ algorithm_app.controller('mainController', function($scope, $routeParams, $locat
           //that.type = 0;
         },3000);
       }
-      else if (time_taken == 0){
-        console.log(callback);
-
+      else if (time_taken.time_spent == 0){
+      //  console.log(callback);
+        console.log("OUT OF TIME!");
         console.log(assignment_test);
         //resubmit_after, time_allowed
         var myData = {};
