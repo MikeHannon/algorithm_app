@@ -30,19 +30,14 @@ algorithm_app.controller('mainController', function($scope, $routeParams, $locat
           failure_counter ++;
         }
       }
-      console.log(failure_counter, "FAILURES");
-      console.log(time_taken.time_spent, "TIME");
-      if (failure_counter == 0){
-        console.log(callback);
 
-        console.log(assignment_test);
-        //resubmit_after, time_allowed
+      if (failure_counter == 0){
+
         var myData = {};
         myData.hints = that.hints;
         myData.time_to_resubmit = 10000;
         myData.time_spent = assignment_test.time_allowed;
         myData.threestartime =time_taken.time_spent;
-        console.log(time_taken, "INNNNNNNFOOOOOO");
         usersFactory.scoreAlgorithm(myData, assignment_test, callback);
         that.hints = 0;
         console.log(myData);
@@ -58,29 +53,31 @@ algorithm_app.controller('mainController', function($scope, $routeParams, $locat
         },3000);
       }
       else if (time_taken.time_spent == 0){
-      //  console.log(callback);
-        console.log("OUT OF TIME!");
-        console.log(assignment_test);
         //resubmit_after, time_allowed
         var myData = {};
         myData.hints = 3;
         myData.time_to_resubmit = assignment_test.resubmit_after;
         myData.time_spent = assignment_test.time_allowed;
         myData.threestartime =time_taken.time_spent;
-        //console.log(time_taken, "INNNNNNNFOOOOOO");
         usersFactory.scoreAlgorithm(myData, assignment_test, callback);
         that.hints = 0;
-        console.log(myData);
-
+        //$('#eval').html(assignment_test.solution);
+      //  append_correct_answer(assignment_test.solution);
         clearTimeout(timers3[0]);
         timers3.pop();
 
         $timeout(function() {
-            console.log(assignment_test);
+          $('#eval').html("<p>this is a functional solution </p>"+ assignment_test.solution);
+            //console.log(assignment_test.solution);
       // usersFactory.reset_
+          //$('#algo_index_main').click();
+          //that.type = 0;
+        },1000);
+
+        $timeout(function() {
           $('#algo_index_main').click();
           //that.type = 0;
-        },3000)
+        },15000);
 
       }
     });

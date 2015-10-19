@@ -3,7 +3,7 @@
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script> -->
 <link rel="stylesheet" href="static/css/main.css">
 <div class ="row">
-  <h4>SCORE: <span ng-bind = "user.total_stars()"></span>/<span ng-bind = "user.possible_stars();"></span> </h4>
+  <h4>SCORE: <span ng-bind = "user.total_stars( admin.algo_search)"></span>/<span ng-bind = "user.possible_stars( admin.algo_search);"></span> </h4>
 </div>
 <p>Most of these algorithms will take you anywhere from 20 minutes to 1 hour to complete.  The challenge algorithms might take you longer.  Practice one algorithm every day and we strongly encourage you to work with other people.</p>
 <div class = "row">

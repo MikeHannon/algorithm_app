@@ -1,5 +1,4 @@
-//unlock is buggy
-algorithm_app.controller('usersController', function($scope,$routeParams, $location,$interval, $timeout, $cookies, usersFactory, algorithmFactory) {
+algorithm_app.controller('usersController', function($filter,$scope,$routeParams, $location,$interval, $timeout, $cookies, usersFactory, algorithmFactory) {
   var that = this;
   this.user = {};
   this.login_errors;
@@ -8,7 +7,6 @@ algorithm_app.controller('usersController', function($scope,$routeParams, $locat
   //var stop;
 
 //this.begin_countdowh();
-
 
   // console.log($cookies);
   // console.log($cookies.getAll(),"my cookies");
@@ -19,23 +17,6 @@ algorithm_app.controller('usersController', function($scope,$routeParams, $locat
   this.IndexTimers = [];
   this.ShowTimers = [];
 
-  this.inter_stars =function(user_id, level){
-    for (var i = 0; i < that.users.length; i ++){
-      // return users[i]._id;
-      if (user_id == that.users[i]._id){
-        var unlocked = 0;
-        var stars = 0;
-        for (var j = 0; j < that.users[i].algorithm.length ; j ++){
-          if (that.users[i].algorithm[j].difficulty == level){
-            stars += that.users[i].algorithm[j].score;
-            if (that.users[i].algorithm[j].unlocked){   unlocked ++;
-            }
-          }
-        }
-        return {"stars":stars, "unlocked":3*unlocked};
-      }
-    }
-  }
 
   this.number_of_times = function(n){
     //console.log(n, "THIS IS A NUMBER");
@@ -59,7 +40,6 @@ algorithm_app.controller('usersController', function($scope,$routeParams, $locat
   };
 
   this.index = function(){
-    console.log("hello");
     usersFactory.index(function(data){
       that.users = data;
     });
@@ -111,15 +91,16 @@ algorithm_app.controller('usersController', function($scope,$routeParams, $locat
 
     });
   }
-  this.total_stars = function(){
+  this.total_stars = function(data2){
     var stars = 0;
+    //$filter
     for (var i = 0; i < that.users_algorithms.length; i ++){
       stars += that.users_algorithms[i].score;
     }
     return stars;
   }
 
-  this.possible_stars = function(){
+  this.possible_stars = function(data2){
     var possible_stars = 0;
     for (var i = 0; i < that.users_algorithms.length; i ++){
       if (that.users_algorithms[i].unlocked){
