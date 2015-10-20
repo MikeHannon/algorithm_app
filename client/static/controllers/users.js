@@ -30,7 +30,7 @@ algorithm_app.controller('usersController', function($filter,$scope,$routeParams
     //  console.log(that.login_errors);
       }
       else {
-        console.log(data);
+      //  console.log(data);
         set_users(data);
         that.login_errors = null;
         that.users_algorithms_index();
@@ -58,17 +58,17 @@ algorithm_app.controller('usersController', function($filter,$scope,$routeParams
     user_info['token']=213421512341234;
   //  console.log(user_info);
     usersFactory.register(user_info, function(data){
-     console.log(data, "FROM FACTORY!!!");
+    // console.log(data, "FROM FACTORY!!!");
       if (data.errors){
         that.registration_errors = data.errors;
       }
       else {
-        console.log(data);
+    //    console.log(data);
       //  data['user_id']=data._id;
         set_users(data);
         that.login_errors = null;
         that.users_algorithms_index();
-          console.log(data);
+      //    console.log(data);
         $location.path("/algorithms");
 
       }
@@ -79,33 +79,37 @@ algorithm_app.controller('usersController', function($filter,$scope,$routeParams
 
   this.initiate_algorithm = function(user_id, algo){
   //  console.log(algo,"from initiate");
+
     usersFactory.unloadPage(that.users_algorithms, that.user._id);
     usersFactory.initiate_algorithm(user_id,algo,function(data){
     that.users_algorithms_index();
     usersFactory.get_current_algorithms(function(data){
       this.users_algorithms = data;
-      console.log(this.users_algorithms);
+    //  console.log(this.users_algorithms);
     });
-     console.log(user_id);
+  //   console.log(user_id);
 
 
     });
   }
   this.total_stars = function(data2){
+
     var stars = 0;
-    //$filter
-    for (var i = 0; i < that.users_algorithms.length; i ++){
-      stars += that.users_algorithms[i].score;
+    var algorithms_of_type = $filter('filter')(that.users_algorithms, data2);
+  //  console.log(donut);
+    for (var i = 0; i < algorithms_of_type.length; i ++){
+      stars += algorithms_of_type[i].score;
     }
     return stars;
   }
 
   this.possible_stars = function(data2){
     var possible_stars = 0;
-    for (var i = 0; i < that.users_algorithms.length; i ++){
-      if (that.users_algorithms[i].unlocked){
+      var algorithms_of_type = $filter('filter')(that.users_algorithms, data2);
+    for (var i = 0; i < algorithms_of_type.length; i ++){
+      //if (that.users_algorithms[i].unlocked){
       possible_stars += 3;
-      }
+      //}
     }
     return possible_stars;
   }

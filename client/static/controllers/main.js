@@ -67,12 +67,8 @@ algorithm_app.controller('mainController', function($scope, $routeParams, $locat
         timers3.pop();
 
         $timeout(function() {
-          $('#eval').html("<p>this is a functional solution </p>"+ assignment_test.solution);
-            //console.log(assignment_test.solution);
-      // usersFactory.reset_
-          //$('#algo_index_main').click();
-          //that.type = 0;
-        },1000);
+          $('#eval').html("<h4>this is a functional solution </h4>"+ assignment_test.solution);
+        },5000);
 
         $timeout(function() {
           $('#algo_index_main').click();
