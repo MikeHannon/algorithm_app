@@ -51,7 +51,7 @@
         <li><a class = "black-text" ng-bind = "user.user.first_name"></a></li>
         <li><a ng-href = "#/users" ng-if = "!user.user['first_name']">Login</a></li>
         <li><a ng-href= "#/users" ng-click = "user.logout();main.test_function(user.IndexTimers); user.IndexTimers.pop();" ng-if = "user.user['first_name']">Logout</a></li>
-        <li><a href="#/admin" ng-if = "user.user['admin_level']>1" ng-click = "main.test_function(user.IndexTimers); user.IndexTimers.pop();">Admin</a></li>
+        <li><a id ="admin_link" href="#/admin" ng-if = "user.user['admin_level']>1" ng-click = "main.test_function(user.IndexTimers); user.IndexTimers.pop();">Admin</a></li>
       </ul>
     </div>
   </nav>

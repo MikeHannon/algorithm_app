@@ -79,3 +79,7 @@
 p{
   margin: 1px;
 }
+#user_difficulty{
+  width: 1000px;
+  background-color:blue;
+}

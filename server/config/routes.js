@@ -73,11 +73,13 @@ module.exports = function(app) {
   });
 //update
   app.patch('/users/:id', function(req,res){
-    res.json({"hello": req.params.id});
+    console.log("????");
+    Users.update(req,res);
+    //res.json({"hello": req.params.id});
   });
-//
+// delete
   app.delete('/users/:id', function(req,res){
-  res.json({"hello": req.params.id});
+    Users.delete(req,res);
   });
 
   app.patch('/users_algos/:id', function(req,res){

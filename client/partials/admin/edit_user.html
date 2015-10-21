@@ -1,0 +1,18 @@
+<div class ="row">
+  <div class = "col m11 offset-m1">
+    <input type = 'text'  ng-model = "user.updatable_user.first_name" name = "first_name" placeholder = "first name">
+    <input type = 'text' ng-model = "user.updatable_user.last_name" name = "last_name" placeholder = "last name">
+    <input type = 'text' ng-model = "user.updatable_user.admin_level" name = "admin_level" placeholder = "admin level">
+    <input type = 'text' ng-model = "user.updatable_user.email" name = "email" placeholder = "email" >
+    <input type = 'text' ng-model = "user.updatable_user.group" name = "group" placeholder = "cohort as: Location | Start Date: as (Day/Month/Year). e.g. Seattle 02/11/2016">
+    <p>
+       <input name="group1" type="radio" id="test1" ng-click = "user.should_update = true"/>
+       <label for="test1">Reset Algorithm Data</label>
+     </p>
+     <p>
+       <input name="group1" type="radio" id="test2" ng-click = "user.should_update = false"/>
+       <label for="test2">Don't Reset Algorithm Data</label>
+     </p>
+    <button ng-click = "user.update_specific_users();" ng-confirm-click = "Update this user?">Update</button>
+  </div>
+</div>

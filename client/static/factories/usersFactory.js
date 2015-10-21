@@ -1,6 +1,6 @@
 algorithm_app.factory('usersFactory', function($http) {
   var factory = {};
-  var users = [];
+  factory.users = [];
   var users_algorithms = [];
   var user = {};
   factory.update_current_algorithms = function (data){
@@ -27,6 +27,12 @@ algorithm_app.factory('usersFactory', function($http) {
       callback(users);
     });
   }
+  factory.index2 = function(){
+    $http.get('/users').success(function(output) {
+      console.log("hello");
+       this.users = output;
+     });
+   }
 
   factory.createUsers = function(callback){
    $http.patch('/users/1').success(function(output) {
@@ -178,7 +184,6 @@ algorithm_app.factory('usersFactory', function($http) {
 
     }, function(){});
     }
-
   }
   factory.unloadPage = function(algo, user_id){
     console.log(algo);
@@ -189,6 +194,20 @@ algorithm_app.factory('usersFactory', function($http) {
     console.log(algo);
     $http.patch("/users_algos/"+user_id, algo).then(function(data){}), function(){};
   };
+
+  factory.update = function(data, callback){
+    console.log("hello");
+    $http.patch('/users/'+data._id, data).then(function(data){
+      console.log(data.data, "FROM UPDATE");
+      callback();
+    });    //usersFactory.update(that.updatable_user)
+  };
+  factory.delete_user = function(data,callback){
+    $http.delete('/users/'+data).then(function(data){
+      console.log(data.data);
+      callback();
+    });
+  }
 
 return factory;
 });

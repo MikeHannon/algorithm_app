@@ -189,5 +189,31 @@ module.exports = (function() {
       });
 
     },
+
+    update:function(req,res){
+
+      User.findOneAndUpdate({_id:req.params.id},{$set:{
+        email:req.body.email,
+        first_name:req.body.first_name,
+        algorithm:req.body.algorithm,
+        last_name:req.body.last_name,
+        cohort:req.body.cohort,
+        admin_level:req.body.admin_level
+      }},function(err,data){
+
+        if (err){res.json({});return "fail";}
+        else {
+          res.json(data);
+        }
+      });
+    },
+
+    delete:function(req,res){
+      User.remove({_id:req.params.id}, function(err){
+        if (err){res.json({});}
+        else{res.json({is_true:"true"});}
+      });
+    }
+
   }
 })();

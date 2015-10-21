@@ -32,7 +32,7 @@
     <p ng-bind = "specific_algorithm.title"></p>
   </div>
   <div class = "col m2 offset-m6">
-    <p><a class = "" ng-href = "#/algorithms/{{specific_algorithm._id}}/edit"  ng-click = "algorithm.edit_algorithm(specific_algorithm)">Edit</a></p>
+    <p><a class = "" ng-href = "#/algorithms/{{specific_algorithm._id}}/edit"  ng-click = "algorithm.edit_algorithm(specific_algorithm);user.should_update = false;">Edit</a></p>
   </div>
 
   <div class = "col m2">
@@ -227,27 +227,38 @@
 
   <div class = "col m3 offset-m1"  >
     <input placeholder = "Search" id = "user_search" ng-model = "admin.users_search" type = "text">
-    <label for = "user_search">Search</label>
+    <label for = "user_search">Search Users</label>
+    <input placeholder = "Search" id = "algo_search" ng-model = "admin.algo_search" type = "text">
+    <label for = "aglo_search">Search Algorithms</label>
   </div>
   <table class = "col m8 offset-m1"  ng-if = "admin.users_index_bool">
     <tr>
-      <td>Last Name, First Name</td>
-      <td>Admin Level</td>
-      <td>Cohort</td>
-      <td><p>Current Status</p>
-          <p> <u>Int</u> |  <u>Adv</u> |  <u>Challenge</u> </p></td>
-      <td>Email</td>
+      <td><label>Last Name</label></td>
+      <td><label>First Name</label></td>
+      <td><label>Admin Level</label></td>
+      <td><label>Cohort</label></td>
+          <!-- <p> <u>Int</u> |  <u>Adv</u> |  <u>Challenge</u> </p> -->
+
+      <td><label>beginner</label></td>
+      <td><label>intermerdiate</label></td>
+      <td><label>advanced</label></td>
+      <td><label>challenge</label></td>
+
+      <td><label>Email</label></td>
+      <td><label>Edit</label></td>
     </tr>
     <tr ng-repeat = "user_info in user.users | orderBy:admin.sortType:admin.sortReverse | filter:admin.users_search">
-      <td><span ng-bind = "user_info.last_name"></span>, <span  ng-bind = "user_info.first_name"></td>
+      <td><span ng-bind = "user_info.last_name"></span></td>
+      <td><span  ng-bind = "user_info.first_name"></span></td>
       <td ng-bind = "user_info.admin_level"></td>
-      <td>Class of </td>
-      <td> <span ng-bind = "user.inter_stars (user_info._id,0).stars"></span>/<span ng-bind = "user.inter_stars(user_info._id,0).unlocked"></span>  | <span ng-bind = "user.inter_stars (user_info._id,1).stars"></span>/<span ng-bind = "user.inter_stars(user_info._id,1).unlocked"></span> | <span ng-bind = "user.inter_stars (user_info._id,2).stars"></span>/<span ng-bind = "user.inter_stars(user_info._id,2).unlocked"></span> </td>
+      <td>In: <span ng-bind="user_info.group"></span> </td>
+      <td> <span ng-bind = "user.inter_stars2 (user_info,0,admin.algo_search).stars"></span>/<span ng-bind = "user.inter_stars(user_info,0,admin.algo_search).unlocked"></span> </td>
+       <td> <span ng-bind = "user.inter_stars2 (user_info,1,admin.algo_search).stars"></span>/<span ng-bind = "user.inter_stars(user_info,1,admin.algo_search).unlocked"></span> </td>
+       <td><span ng-bind = "user.inter_stars2 (user_info,2,admin.algo_search).stars"></span>/<span ng-bind = "user.inter_stars(user_info,2,admin.algo_search).unlocked"></span> </td>
+        <td><span ng-bind = "user.inter_stars2 (user_info,3,admin.algo_search).stars"></span>/<span ng-bind = "user.inter_stars(user_info,3,admin.algo_search).unlocked"></span> </td>
       <td ng-bind = "user_info.email"></td>
-      <td><a href = "">Update</a></td>
-      <td><a href = "">Delete</a></td>
-      <td><a href = "">Info</a></td>
-      <td></td>
+      <td><a ng-href = "#/admin/users/{{user_info._id}}" ng-click = "user.updatable_user = user_info">Update</a></td>
+      <td><a href = "" ng-click = "user.delete_user(user_info._id);">Delete</a></td>
     </tr>
 
   </table>

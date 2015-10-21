@@ -32,6 +32,10 @@ algorithm_app.config(function ($routeProvider) {
        templateUrl: './../partials/admin/index.html',
        controller: 'validCredentials'
     })
+    .when('/admin/users/:id',{
+      templateUrl: './../partials/admin/edit_user.html',
+      controller:'validCredentials'
+    })
     .otherwise({
       redirectTo: '/'
     });

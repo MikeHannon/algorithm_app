@@ -1,9 +1,11 @@
 algorithm_app.controller('usersController', function($filter,$scope,$routeParams, $location,$interval, $timeout, $cookies, usersFactory, algorithmFactory) {
   var that = this;
+  this.updatable_user = {};
   this.user = {};
   this.login_errors;
   this.registration_errors;
   this.counter = 100;
+  this.should_update = false;
   //var stop;
 
 //this.begin_countdowh();
@@ -11,12 +13,31 @@ algorithm_app.controller('usersController', function($filter,$scope,$routeParams
   // console.log($cookies);
   // console.log($cookies.getAll(),"my cookies");
   // console.log($cookies.get("first_name"));
-  this.users = [];
+  this.users = usersFactory.users;
   this.users_algorithms = [];
   this.active_algorithm = {};
   this.IndexTimers = [];
   this.ShowTimers = [];
 
+  this.delete_user = function(data){
+    console.log(data);
+    usersFactory.delete_user(data,function(){
+      that.index();});
+  }
+
+  this.update_specific_users = function(){
+  //  console.log(that.updatable_user);
+    if(that.should_update){
+      console.log(that.should_update);
+      that.updatable_user.algorithm = [];
+    }
+    usersFactory.update(that.updatable_user, function(){
+      var t =  setInterval(function(){
+        $('#admin_link').click();
+      }, 200);
+    });
+    that.should_update = false;
+  }
 
   this.number_of_times = function(n){
     //console.log(n, "THIS IS A NUMBER");
@@ -135,6 +156,41 @@ this.set_active_algorithm = function(algo_id){
     }
   }
 }
+
+this.inter_stars = function (data1,data2,data3){
+  var unlocked = 0;
+
+  var algorithms_of_type = $filter('filter')(data1.algorithm, data3);
+
+  for (var j=0;j < algorithms_of_type.length; j ++){
+      if (algorithms_of_type[j].difficulty == data2){
+        unlocked += 3;
+      }
+  }
+
+return {"unlocked":unlocked};
+};//(user_info._id,2,admin.users_search).unlocked
+
+this.inter_stars2 = function (data1,data2,data3){
+  var stars = 0;
+//  console.log(data1);
+  var algorithms_of_type = $filter('filter')(data1.algorithm, data3);
+  //console.log(algorithms_of_type, data2);
+  for (var i=0; i < algorithms_of_type.length; i ++){
+      if (algorithms_of_type[i].difficulty == data2){
+        stars += algorithms_of_type[i].score;
+        //console.log(algorithms_of_type[i].score, "SCORE");
+      }
+  }
+  // for (var j=0;j < algorithms_of_type.length; j ++){
+  //     if (algorithms_of_type[j].difficulty == data2){
+  //       unlocked += 3;
+  //     }
+  // }
+
+return {"stars":stars};
+};//(user_info._id,2,admin.users_search).unlocked
+
 
 this.algorithm_unlocked = function(algorithm_id){
 //console.log(algorithm_id);
