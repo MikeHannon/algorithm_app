@@ -6,13 +6,6 @@ algorithm_app.controller('usersController', function($filter,$scope,$routeParams
   this.registration_errors;
   this.counter = 100;
   this.should_update = false;
-  //var stop;
-
-//this.begin_countdowh();
-
-  // console.log($cookies);
-  // console.log($cookies.getAll(),"my cookies");
-  // console.log($cookies.get("first_name"));
   this.users = usersFactory.users;
   this.users_algorithms = [];
   this.active_algorithm = {};

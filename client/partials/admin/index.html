@@ -26,7 +26,9 @@
   </div>
 </div>
 
-
+<div class = "row">
+<div></div>
+</div>
 <div class = 'row' ng-if = "admin.algorithm_index_bool" ng-repeat = "specific_algorithm in algorithm.algorithms">
   <div class = " col m2">
     <p ng-bind = "specific_algorithm.title"></p>
@@ -229,7 +231,7 @@
     <input placeholder = "Search" id = "user_search" ng-model = "admin.users_search" type = "text">
     <label for = "user_search">Search Users</label>
     <input placeholder = "Search" id = "algo_search" ng-model = "admin.algo_search" type = "text">
-    <label for = "aglo_search">Search Algorithms</label>
+    <label for = "algo_search">Search Algorithms</label>
   </div>
   <table class = "col m8 offset-m1"  ng-if = "admin.users_index_bool">
     <tr>
