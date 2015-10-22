@@ -26,10 +26,13 @@
   </div>
 </div>
 
-<div class = "row">
-<div></div>
-</div>
-<div class = 'row' ng-if = "admin.algorithm_index_bool" ng-repeat = "specific_algorithm in algorithm.algorithms">
+
+<div class = 'row' ng-if = "admin.algorithm_index_bool" >
+  <div class = "row">
+  <input class = "col m2 offset-m1" ng-model = 'algo_filter_title' placeholder="title">
+  <input class = "col m2 offset-m1" ng-model = 'algo_filter_difficulty' placeholder="difficulty 0-3">
+  </div>
+    <div class = 'row' ng-repeat = "specific_algorithm in algorithm.algorithms | filter:{title:algo_filter_title} | filter:{difficulty:algo_filter_difficulty} | orderBy:'title'">
   <div class = " col m2">
     <p ng-bind = "specific_algorithm.title"></p>
   </div>
@@ -40,6 +43,7 @@
   <div class = "col m2">
     <p><a class = "" ng-click = "algorithm.delete_algorithm(specific_algorithm._id)" ng-confirm-click = "Are you sure you want to permanently remove this algorithm?">Delete</a></p>
   </div>
+</div>
 </div>
 
 <div class = 'row' ng-if = "admin.algorithm_new_bool">
@@ -199,8 +203,8 @@
         </div>
       </div>
     </form>
-  </div>
 
+</div>
 
 
 

@@ -29,7 +29,8 @@ var schema = new mongoose.Schema(
     difficulty:'number',//
     type:'string',//
     degradation_rate:'number',//
-    resubmit_after:'number', //resubmit
+    resubmit_after:'number',
+    approx_order:'number', //resubmit
     created_at: { type: Date, default: Date.now },
     updated_at: { type: Date, default: Date.now }
     }

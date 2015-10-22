@@ -32,7 +32,7 @@
     </div>
     <div class="col s12" id = "beginner">
       <div class="row">
-        <div ng-repeat = "algo in algorithm.algorithms | filter:admin.algo_search">
+        <div ng-repeat = "algo in algorithm.algorithms | filter:admin.algo_search | orderBy:'title'">
       <!-- algo.name -->
       <div ng-if = "algo.difficulty == 0">
 
@@ -69,7 +69,7 @@
 
       <div class="col s12" id = "intermediate">
         <div class="row">
-          <div ng-repeat = "algo in algorithm.algorithms | filter:admin.algo_search">
+          <div ng-repeat = "algo in algorithm.algorithms | filter:admin.algo_search | orderBy:'title'">
         <!-- algo.name -->
         <div ng-if = "algo.difficulty == 1">
 
@@ -105,9 +105,9 @@
 
       <div class="col s12" id = "advanced">
         <div class="row">
-          <div ng-repeat = "algo in algorithm.algorithms | filter:admin.algo_search">
+          <div ng-repeat = "algo in algorithm.algorithms | filter:admin.algo_search | orderBy:'title'">
         <!-- algo.name -->
-        <div ng-if = "algo.difficulty == 0">
+        <div ng-if = "algo.difficulty == 2">
 
                 <div class="col s12 m4">
                   <div class="card blue-grey darken-1 tiny">
@@ -139,10 +139,10 @@
             </div>
       </div>
 
-
+<!-- THIS  NEEDS WORK -->
       <div class="col s12" id = "challenge">
         <div class="row">
-          <div ng-repeat = "algo in algorithm.algorithms">
+            <div ng-repeat = "algo in algorithm.algorithms | filter:admin.algo_search | orderBy:'title'">
         <!-- algo.name -->
         <div ng-if = "algo.difficulty == 3">
 
@@ -160,6 +160,7 @@
               </div>
             </div>
 
+<!-- THIS  NEEDS WORK -->
         </div>
       <div class="col s12" id = "badges">Badges</div>
   </div>

@@ -39,6 +39,7 @@ algorithm_app.controller('adminController', function($scope,$routeParams, $locat
     that.data_index_bool = false;
     that.data_new_bool = false;
   };
+  
   that.algorithm_new = function(){
     that.algorithm_index_bool = false;
     that.algorithm_new_bool = true;
@@ -47,6 +48,7 @@ algorithm_app.controller('adminController', function($scope,$routeParams, $locat
     that.data_index_bool = false;
     that.data_new_bool = false;
   };
+
   that.users_index = function(){
     console.log("users index");
     that.algorithm_index_bool = false;
