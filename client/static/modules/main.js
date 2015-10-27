@@ -1,8 +1,7 @@
 var algorithm_app = angular.module('algorithm_app',[
   'ngRoute','ngSanitize','ngCookies'
-]);
-//routes
-algorithm_app.config(function ($routeProvider) {
+])
+.config(function ($routeProvider) {
   $routeProvider
     .when('/',{
        templateUrl: './../partials/users/new.html',
@@ -39,8 +38,8 @@ algorithm_app.config(function ($routeProvider) {
     .otherwise({
       redirectTo: '/'
     });
-});
-algorithm_app.filter('duration', function() {
+})
+.filter('duration', function() {
     //Returns duration from milliseconds in hh:mm:ss format.
       return function(millseconds) {
         var seconds = Math.floor(millseconds / 1000);
@@ -56,9 +55,10 @@ algorithm_app.filter('duration', function() {
         timeString = hours +":"+ minutes +":"+scnds;
         return timeString;
     }
-});
-algorithm_app.directive('ngConfirmClick', [
+})
+.directive('ngConfirmClick', [
   function(){
+    //console.log("hello");
     return {
       priority: -1,
       restrict: 'A',
