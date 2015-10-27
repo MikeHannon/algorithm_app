@@ -17,8 +17,16 @@ algorithm_app.controller('mainController', function($scope, $routeParams, $locat
   //  console.log(algorithmFactory.show_single(function(data){console.log(data);}));
 
     that.type = 1;
-
-    var data = that.evaluate.function.editor.getValue() + assignment_test.test_code;
+    // its a string here:
+    var local_data = that.evaluate.function.editor.getValue();
+    var truncate_at = local_data.indexOf("/* ----- TEST CODE BELOW HERE----- */");
+    if (truncate_at > 0){
+    var local_substring = local_data.substring(0, truncate_at);
+    var data = local_substring + assignment_test.test_code;
+    }
+    else{
+      var data = local_data +  assignment_test.test_code;
+    }
     //catches failures!
   //  console.log(data);
 
