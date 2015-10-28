@@ -73,4 +73,25 @@ var algorithm_app = angular.module('algorithm_app',[
       }
     }
   }
-]);
+])
+.directive("myWidget", function() {
+  var linkFunction = function(scope, element, attr) {
+    console.log(attr);
+    console.log(element);
+    var myData = JSON.parse(  attr.myWidget);
+    function updateElement(){
+    //  console.log(attr.myWidget);
+      element.text(myData.first_name);
+    }
+    updateElement();
+  };
+
+
+  return {
+  //  this.data : linkFunction,
+    restrict: "A",
+    link: linkFunction,
+  //  template: "<p></p>",
+
+  };
+});
