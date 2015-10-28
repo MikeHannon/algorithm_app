@@ -14,6 +14,7 @@ var schema = new mongoose.Schema(
     test_code:'string', //need
     solution:'string', //need
     supp_materials:[],//
+    weight:'number',
     hint1:'string',//
     hint2:'string',//
     hint3:'string',//
@@ -38,7 +39,7 @@ var schema = new mongoose.Schema(
 //relational with algorithm through state?
 
 var algorithm = mongoose.model('Algorithm', schema);
-
+schema.path('weight').required(true);
 schema.path('title').required(true);
 schema.path('goal').required(true);
 schema.path('Onestar').required(true);

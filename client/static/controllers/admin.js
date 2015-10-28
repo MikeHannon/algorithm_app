@@ -9,7 +9,7 @@ algorithm_app.controller('adminController', function($scope,$routeParams, $locat
   that.oneStar = "Use two hints";
   that.twoStars = "Use one hint";
   that.threeStars = "Use no hints";
-
+  that.weight = 0;
   that.hint1_timer = 10000000;
   that.hint2_timer = 18000000;
   that.hint3_timer = 24000000;
@@ -39,7 +39,7 @@ algorithm_app.controller('adminController', function($scope,$routeParams, $locat
     that.data_index_bool = false;
     that.data_new_bool = false;
   };
-  
+
   that.algorithm_new = function(){
     that.algorithm_index_bool = false;
     that.algorithm_new_bool = true;
@@ -83,6 +83,7 @@ algorithm_app.controller('adminController', function($scope,$routeParams, $locat
     that.data_new_bool = true;
   };
   that.create_algorithm = function(){
+
     if (!that.algorithm){
       that.algorithm = {};
     }

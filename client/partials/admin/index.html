@@ -96,10 +96,16 @@
             </div>
           </div>
           <div class="row">
-            <div class="input-field col s12">
+            <div class="input-field col s6">
               <input id="algo_evaluation" ng-model = "admin.algorithm.Evaluation" type="text" name = "Evaluation">
               <label for="algo_evaluation">What is going to be evaluated</label>
             </div>
+
+            <div class="input-field col s6">
+              <input id="algo_weight" ng-model = "admin.algorithm.weight" type="text" name = "weight">
+              <label for="algo_evaluation">Relative Difficulty (0-1000)</label>
+            </div>
+
           </div>
         </form>
     </div>
@@ -117,7 +123,7 @@
             <input id="hint1_time" ng-model = "admin.algorithm.hint1_time" type="text" ng-value ="admin.hint1_timer" name = "hint1_time" placeholder="milliseconds (1/2 hr is 1800000) before hint available">
             <label for="hint1_time">Hint1 Time(ms)</label>
           </div>
-          <div class="input-field col s6">
+          <div class="input-field col s3">
             <input id="hint1_keystrokes" ng-model = "admin.algorithm.hint1_keystrokes" type="text" name = "hint1_keystrokes" placeholder="number of keystrokes before hint is available" ng-value ="admin.hint1_keystroke">
             <label for="hint1_keystrokes">Hint1 KeyStrokes</label>
           </div>

@@ -53,9 +53,13 @@
         </div>
       </div>
       <div class="row">
-        <div class="input-field col s12">
+        <div class="input-field col s6">
           <input id="algo_evaluation" ng-model = "algorithm.show_algorithm.Evaluation" type="text" name = "Evaluation">
           <label for="algo_evaluation">What is going to be evaluated</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="algo_weight" ng-model = "admin.show_algorithm.weight" type="text" name = "weight">
+          <label for="algo_evaluation">Relative Difficulty (0-1000)</label>
         </div>
       </div>
 
